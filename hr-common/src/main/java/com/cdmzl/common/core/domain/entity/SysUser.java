@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class SysUser extends BaseEntity {
      */
     @Column
     @Sensitive(strategy = SensitiveStrategy.PHONE)
-    private String phonenumber;
+    private String phoneNumber;
 
     /**
      * 用户性别
@@ -136,6 +137,83 @@ public class SysUser extends BaseEntity {
      */
     @Column
     private String remark;
+
+    /**
+     * 员工生日
+     */
+    private Date birthday;
+    /**
+     * 员工身份证号
+     */
+    private String idCard;
+    /**
+     * 员工婚姻状况
+     */
+    private String wedlock;
+    /**
+     * 员工籍贯
+     */
+    private String nativePlace;
+    /**
+     * 员工政治面貌
+     */
+    private String politic;
+    /**
+     * 员工地址
+     */
+    private String address;
+    /**
+     * 员工职称ID
+     */
+    private Integer jobLevelId; // 员工职称ID
+    /**
+     * 员工聘用形式
+     */
+    private String engageForm;
+    /**
+     * 员工最高学历
+     */
+    private String tiptopDegree;
+    /**
+     * 员工专业
+     */
+    private String specialty;
+    /**
+     * 员工毕业院校
+     */
+    private String school;
+    /**
+     * 员工入职日期
+     */
+    private Date beginDate;
+    /**
+     * 员工在职状态
+     */
+    private String workState;
+    /**
+     * 员工工号
+     */
+    private String workId;
+    /**
+     * 员工合同期限
+     */
+    private BigDecimal contractTerm;
+    /**
+     * 员工转正日期
+     */
+    private Date conversionTime;
+    /**
+     * 员工合同起始日期
+     */
+    private Date beginContract;
+    /**
+     * 员工合同终止日期
+     */
+    private Date endContract;
+    /**
+     * 工龄
+     */
+    private Integer workAge;
 
     /**
      * 部门对象
