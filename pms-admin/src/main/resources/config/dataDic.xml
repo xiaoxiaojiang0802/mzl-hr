@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataTypes>
+    <dataType dictName="房间状态" dictType="hot_room_state" status="0">
+        <dataDic dictSort="1" dictLabel="正常" dictValue="1" status="0"/>
+        <dataDic dictSort="2" dictLabel="预定" dictValue="2" status="0"/>
+        <dataDic dictSort="3" dictLabel="住净" dictValue="3" status="0"/>
+        <dataDic dictSort="4" dictLabel="空脏" dictValue="4" status="0"/>
+        <dataDic dictSort="6" dictLabel="住脏" dictValue="6" status="0"/>
+    </dataType>
+    <dataType dictName="订单状态" dictType="hot_order_state" status="0">
+        <dataDic dictSort="1" dictLabel="待接单" dictValue="1" status="0"/>
+        <dataDic dictSort="2" dictLabel="待入住" dictValue="2" status="0"/>
+        <dataDic dictSort="3" dictLabel="已入住" dictValue="3" status="0"/>
+        <dataDic dictSort="4" dictLabel="离店" dictValue="4" status="0"/>
+        <dataDic dictSort="5" dictLabel="取消" dictValue="5" status="0"/>
+    </dataType>
+    <dataType dictName="支付方式" dictType="hot_pay_method" status="0">
+        <dataDic dictSort="1" dictLabel="微信" dictValue="1" status="0"/>
+        <dataDic dictSort="2" dictLabel="支付宝" dictValue="2" status="0"/>
+        <dataDic dictSort="3" dictLabel="现金" dictValue="3" status="0"/>
+        <dataDic dictSort="4" dictLabel="其他" dictValue="4" status="0"/>
+    </dataType>
+    <dataType dictName="下单平台" dictType="hot_order_platform" status="0">
+        <dataDic dictSort="1" dictLabel="美团" dictValue="1" status="0"/>
+        <dataDic dictSort="2" dictLabel="去哪儿" dictValue="2" status="0"/>
+        <dataDic dictSort="3" dictLabel="携程" dictValue="3" status="0"/>
+        <dataDic dictSort="4" dictLabel="飞猪" dictValue="4" status="0"/>
+    </dataType>
+    <dataType dictName="超时处理方法" dictType="timeout_method" status="0">
+        <dataDic dictSort="1" dictLabel="正常" dictValue="1" status="0"/>
+        <dataDic dictSort="2" dictLabel="超时不收费" dictValue="2" status="0"/>
+        <dataDic dictSort="3" dictLabel="超时收费" dictValue="3" status="0"/>
+    </dataType>
+    <dataType dictName="居住类型" dictType="hot_live_type" status="0">
+        <dataDic dictSort="1" dictLabel="日租" dictValue="1" status="0"/>
+        <dataDic dictSort="2" dictLabel="短租" dictValue="2" status="0"/>
+        <dataDic dictSort="3" dictLabel="长租" dictValue="3" status="0"/>
+        <dataDic dictSort="4" dictLabel="钟点房" dictValue="4" status="0"/>
+    </dataType>
+    <dataType dictName="经营成本" dictType="hot_cost_category" status="0">
+        <dataDic dictSort="1" dictLabel="水" dictValue="1" status="0"/>
+        <dataDic dictSort="2" dictLabel="房租" dictValue="2" status="0"/>
+        <dataDic dictSort="3" dictLabel="电" dictValue="3" status="0"/>
+        <dataDic dictSort="4" dictLabel="气" dictValue="4" status="0"/>
+        <dataDic dictSort="5" dictLabel="布草" dictValue="5" status="0"/>
+        <dataDic dictSort="6" dictLabel="维修" dictValue="6" status="0"/>
+        <dataDic dictSort="7" dictLabel="房间设施" dictValue="7" status="0"/>
+        <dataDic dictSort="8" dictLabel="人力" dictValue="8" status="0"/>
+    </dataType>
+</dataTypes>
