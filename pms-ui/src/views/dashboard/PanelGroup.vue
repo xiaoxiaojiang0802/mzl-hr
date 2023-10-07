@@ -57,7 +57,6 @@
 
 <script>
 import CountTo from 'vue-count-to';
-import {selectIndex} from "@/api/system";
 
 export default {
   data() {
@@ -73,19 +72,10 @@ export default {
   components: {
     CountTo
   },
-  created() {
-    this.selectIndex();
-  },
   methods: {
     handleSetLineChartData(type) {
       this.$emit('handleSetLineChartData', type)
     },
-    selectIndex() {
-      selectIndex().then(data => {
-          this.indexVo = data;
-        }
-      );
-    }
   }
 }
 </script>
