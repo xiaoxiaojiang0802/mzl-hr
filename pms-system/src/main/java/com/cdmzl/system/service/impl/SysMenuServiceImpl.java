@@ -3,7 +3,6 @@ package com.cdmzl.system.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.XmlUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -24,10 +23,7 @@ import com.cdmzl.system.service.ISysMenuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
@@ -301,22 +297,6 @@ public class SysMenuServiceImpl implements ISysMenuService {
             return UserConstants.NOT_UNIQUE;
         }
         return UserConstants.UNIQUE;
-    }
-
-    /**
-     * 初始化菜单
-     */
-    @PostConstruct
-    @Override
-    public void initMenu() {
-        Document document = XmlUtil.readXML(Thread.currentThread().getContextClassLoader().getResource("config/menu.xml").getPath());
-        NodeList nodeList = document.getDocumentElement().getElementsByTagName("SysMenu");
-        List<SysMenu> sysMenus = new ArrayList<>();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            SysMenu sysMenu = XmlUtil.xmlToBean(nodeList.item(i), SysMenu.class);
-            sysMenus.add(sysMenu);
-        }
-        baseMapper.insertOrUpdateBatch(sysMenus);
     }
 
     /**

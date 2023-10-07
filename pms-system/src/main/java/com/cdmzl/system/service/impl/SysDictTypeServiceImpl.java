@@ -1,14 +1,10 @@
 package com.cdmzl.system.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.XmlUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cdmzl.common.actable.utils.XmlUtils;
 import com.cdmzl.common.constant.CacheNames;
 import com.cdmzl.common.constant.UserConstants;
 import com.cdmzl.common.core.domain.PageQuery;
@@ -25,14 +21,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
@@ -266,12 +257,11 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService, DictService 
     public String getDictValue(String dictType, String dictLabel, String separator) {
         StringBuilder propertyString = new StringBuilder();
         List<SysDictData> datas = selectDictDataByType(dictType);
-
         if (StringUtils.containsAny(dictLabel, separator) && CollUtil.isNotEmpty(datas)) {
             for (SysDictData dict : datas) {
                 for (String label : dictLabel.split(separator)) {
                     if (label.equals(dict.getDictLabel())) {
-                        propertyString.append(dict.getDictValue() + separator);
+                        propertyString.append(dict.getDictValue()).append(separator);
                         break;
                     }
                 }
@@ -284,66 +274,6 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService, DictService 
             }
         }
         return StringUtils.stripEnd(propertyString.toString(), separator);
-    }
-
-    @PostConstruct
-    public void init() throws Exception {
-        Document document = XmlUtil.readXML(new ClassPathResource("config/dataDic.xml").getInputStream());
-        Element root = document.getDocumentElement();
-        /*初始对接系统数据*/
-        NodeList nodeList = root.getElementsByTagName("dataType");
-        this.initDataDicList(nodeList);
-    }
-
-    /**
-     * 初始化已有数据
-     *
-     * @param nodeList 数据类型
-     */
-    private void initDataDicList(NodeList nodeList) {
-        ThreadUtil.execute(() -> {
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Element element = (Element) nodeList.item(i);
-                SysDictType dataType = XmlUtils.readObjectFromNodeAttr(element, SysDictType.class);
-                List<SysDictData> dataDicList = new ArrayList<>();
-                NodeList dataDices = element.getElementsByTagName("dataDic");
-                for (int j = 0; j < dataDices.getLength(); j++) {
-                    SysDictData dataDic = XmlUtils.readObjectFromNodeAttr((Element) dataDices.item(j), SysDictData.class);
-                    dataDic.setDictType(dataType.getDictType());
-                    if (dataDic.getDictSort() == null) {
-                        dataDic.setDictSort(j);
-                    }
-                    dataDicList.add(dataDic);
-                }
-                dataType.setDictDataList(dataDicList);
-                try {
-                    this.saveDataType(dataType);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public void saveDataType(SysDictType dictType) {
-        SysDictType sysDictType = baseMapper.selectOne(new LambdaQueryWrapper<SysDictType>().eq(SysDictType::getDictType, dictType.getDictType()));
-        if (sysDictType != null) {
-            dictType.setDictId(sysDictType.getDictId());
-            baseMapper.updateById(dictType);
-        } else {
-            dictType.setDictId(IdUtil.getSnowflakeNextId());
-            baseMapper.insert(dictType);
-        }
-        List<SysDictData> dictDataList = new ArrayList<>();
-        for (SysDictData dictData : dictType.getDictDataList()) {
-            SysDictData sysDictData = dictDataMapper.selectOne(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType, dictData.getDictType())
-                .eq(SysDictData::getDictValue, dictData.getDictValue()));
-            if (sysDictData != null) {
-                dictData.setDictCode(sysDictData.getDictCode());
-            }
-            dictDataList.add(dictData);
-        }
-        dictDataMapper.insertOrUpdateBatch(dictDataList);
     }
 
 }

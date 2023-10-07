@@ -134,9 +134,4 @@ public interface ISysMenuService {
      * @return 结果
      */
     String checkMenuNameUnique(SysMenu menu);
-
-    /**
-     * 初始化菜单
-     */
-    void initMenu();
 }
