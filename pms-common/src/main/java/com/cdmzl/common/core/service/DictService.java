@@ -3,7 +3,7 @@ package com.cdmzl.common.core.service;
 /**
  * 通用 字典服务
  *
- * @author Lion Li
+ * @author ruoyi
  */
 public interface DictService {
 

@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * 分页查询实体类
  *
- * @author Lion Li
+ * @author ruoyi
  */
 
 @Data

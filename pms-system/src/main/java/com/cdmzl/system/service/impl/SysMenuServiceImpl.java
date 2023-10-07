@@ -29,7 +29,7 @@ import java.util.*;
 /**
  * 菜单 业务层处理
  *
- * @author Lion Li
+ * @author ruoyi
  */
 @RequiredArgsConstructor
 @Service
@@ -59,7 +59,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      */
     @Override
     public List<SysMenu> selectMenuList(SysMenu menu, Long userId) {
-        List<SysMenu> menuList = null;
+        List<SysMenu> menuList;
         // 管理员显示所有菜单信息
         if (LoginHelper.isAdmin(userId)) {
             menuList = baseMapper.selectList(new LambdaQueryWrapper<SysMenu>()

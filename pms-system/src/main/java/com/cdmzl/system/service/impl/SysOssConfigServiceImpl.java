@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * 对象存储配置Service业务层处理
  *
- * @author Lion Li
+ * @author ruoyi
  * @date 2021-08-13
  */
 @Slf4j

@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 文件上传 服务层
  *
- * @author Lion Li
+ * @author ruoyi
  */
 public interface ISysOssService {
 

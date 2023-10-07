@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 /**
  * 菜单权限表 sys_menu
  *
- * @author Lion Li
+ * @author ruoyi
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

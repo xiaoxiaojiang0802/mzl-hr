@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 /**
  * 设置注解允许匿名访问的url
  *
- * @author Lion Li
+ * @author ruoyi
  */
 @Lazy
 @Component

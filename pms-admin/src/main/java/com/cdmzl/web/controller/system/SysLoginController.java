@@ -29,7 +29,7 @@ import java.util.Set;
 /**
  * 登录验证
  *
- * @author Lion Li
+ * @author ruoyi
  */
 @Validated
 @RequiredArgsConstructor

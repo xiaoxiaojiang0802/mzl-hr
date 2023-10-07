@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 字典类型表 sys_dict_type
  *
- * @author Lion Li
+ * @author ruoyi
  */
 
 @Data

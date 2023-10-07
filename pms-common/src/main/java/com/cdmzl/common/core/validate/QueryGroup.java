@@ -3,7 +3,7 @@ package com.cdmzl.common.core.validate;
 /**
  * 校验分组 query
  *
- * @author Lion Li
+ * @author ruoyi
  */
 public interface QueryGroup {
 }

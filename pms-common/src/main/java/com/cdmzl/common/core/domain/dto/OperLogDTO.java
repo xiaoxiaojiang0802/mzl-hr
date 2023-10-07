@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 通用操作日志实体
  *
- * @author Lion Li
+ * @author ruoyi
  */
 
 @Data

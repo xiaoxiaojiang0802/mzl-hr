@@ -3,7 +3,7 @@ package com.cdmzl.common.core.service;
 /**
  * 通用 参数配置服务
  *
- * @author Lion Li
+ * @author ruoyi
  */
 public interface ConfigService {
 
