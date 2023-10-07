@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * 启动程序
  *
- * @author jiangjin
+ * @author muzi
  */
 @SpringBootApplication
 @EnableTransactionManagement
