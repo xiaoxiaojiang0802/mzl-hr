@@ -64,7 +64,7 @@ user:
 # Spring配置
 spring:
   application:
-    name: ${jiangjin.name}
+    name: ${cdmzl.name}
   # 资源信息
   messages:
     # 国际化资源文件路径
@@ -195,7 +195,7 @@ swagger:
   enabled: true
   info:
     # 标题
-    title: '标题：${jiangjin.name}后台管理系统_接口文档'
+    title: '标题：${cdmzl.name}后台管理系统_接口文档'
     # 描述
     description: '描述：便于开发使用接口文档管理'
     # 版本

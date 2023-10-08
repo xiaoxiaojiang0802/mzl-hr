@@ -97,7 +97,7 @@ redisson:
   # 单节点配置
   singleServerConfig:
     # 客户端名称
-    clientName: ${jiangjin.name}
+    clientName: ${cdmzl.name}
     # 最小空闲连接数
     connectionMinimumIdleSize: 8
     # 连接池大小
