@@ -1,4 +1,4 @@
-package com.cdmzl.system.domain;
+package com.cdmzl.system.domain.hr;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.cdmzl.common.actable.annotation.Table;
@@ -7,15 +7,15 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 请假记录实体类
+ * 打卡记录
  *
  * @author muzi
  */
-@Table
 @Data
-public class LeaveRecord {
+@Table
+public class AttendanceRecord {
     /**
-     * 请假记录ID
+     * 打卡记录ID
      */
     @TableId
     private Long id;
@@ -31,32 +31,27 @@ public class LeaveRecord {
     private String department;
 
     /**
-     * 请假开始日期
+     * 打卡日期
      */
-    private Date startDate;
+    private Date date;
 
     /**
-     * 请假结束日期
+     * 打卡开始时间
      */
-    private Date endDate;
+    private String startTime;
 
     /**
-     * 请假类型，如事假、病假、婚假等
+     * 打卡结束时间
      */
-    private String leaveType;
+    private String endTime;
 
     /**
-     * 请假理由
-     */
-    private String reason;
-
-    /**
-     * 请假状态，如已申请、已批准、已驳回等
+     * 打卡状态，如正常打卡、迟到、早退等
      */
     private String status;
 
     /**
-     * 请假备注
+     * 打卡备注
      */
     private String remark;
 }

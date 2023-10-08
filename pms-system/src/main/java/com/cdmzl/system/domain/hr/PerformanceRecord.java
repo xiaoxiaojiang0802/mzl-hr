@@ -1,5 +1,6 @@
-package com.cdmzl.system.domain;
+package com.cdmzl.system.domain.hr;
 
+import com.cdmzl.common.actable.annotation.Table;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
  * @author LJJ
  */
 @Data
+@Table
 public class PerformanceRecord {
     /**
      * 绩效记录ID

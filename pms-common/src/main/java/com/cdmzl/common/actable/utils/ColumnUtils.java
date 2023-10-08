@@ -1,5 +1,7 @@
 package com.cdmzl.common.actable.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -290,6 +292,7 @@ public class ColumnUtils {
         // 不参与建表的字段
         String[] excludeFields = excludeFields(clasz);
         // 当前属性名在排除建表的字段内
+        System.out.println(JSONObject.toJSONString(excludeFields) + "----" + field.getName() + Arrays.asList(excludeFields).contains(field.getName()));
         if (Arrays.asList(excludeFields).contains(field.getName())) {
             return false;
         }
@@ -297,12 +300,16 @@ public class ColumnUtils {
         TableField tableField = field.getAnnotation(TableField.class);
         IsKey isKey = field.getAnnotation(IsKey.class);
         TableId tableId = field.getAnnotation(TableId.class);
-        if (column == null && (tableField == null || !tableField.exist())
-            && isKey == null && tableId == null) {
-            // 开启了simple模式
-            return isSimple;
+        if (tableField != null) {
+            return tableField.exist();
+        } else {
+            return true;
         }
-        return true;
+//        if (column == null && isKey == null && tableId == null) {
+//            // 开启了simple模式
+//            return isSimple;
+//        }
+//        return true;
     }
 
     private static Column getColumn(Field field, Class<?> clasz) {
@@ -324,8 +331,14 @@ public class ColumnUtils {
         return null;
     }
 
+    /**
+     * 获取到忽略字段
+     *
+     * @param clasz
+     * @return
+     */
     private static String[] excludeFields(Class<?> clasz) {
-        String[] excludeFields = {};
+        String[] excludeFields = {"serialVersionUID"};
         Table tableName = clasz.getAnnotation(Table.class);
         if (tableName != null) {
             excludeFields = tableName.excludeFields();

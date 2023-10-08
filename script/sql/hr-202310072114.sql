@@ -562,6 +562,18 @@ CREATE TABLE `test_demo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+CREATE TABLE performance_record (
+    id INT NOT NULL AUTO_INCREMENT,
+    employee_name VARCHAR(255) NOT NULL COMMENT '员工姓名',
+    department VARCHAR(255) NOT NULL COMMENT '所属部门',
+    period DATE NOT NULL COMMENT '绩效周期',
+    score INT NOT NULL COMMENT '绩效评分',
+    comment VARCHAR(255) COMMENT '绩效评语',
+    status VARCHAR(255) COMMENT '绩效状态',
+    remark VARCHAR(255) COMMENT '绩效备注',
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='绩效记录表';
+
 --
 -- Dumping data for table `test_demo`
 --
