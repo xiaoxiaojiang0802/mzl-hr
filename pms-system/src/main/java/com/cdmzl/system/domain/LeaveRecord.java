@@ -7,15 +7,15 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 打卡记录实体类
+ * 请假记录实体类
  *
  * @author muzi
  */
-@Data
 @Table
-public class AttendanceRecord {
+@Data
+public class LeaveRecord {
     /**
-     * 打卡记录ID
+     * 请假记录ID
      */
     @TableId
     private Long id;
@@ -31,27 +31,32 @@ public class AttendanceRecord {
     private String department;
 
     /**
-     * 打卡日期
+     * 请假开始日期
      */
-    private Date date;
+    private Date startDate;
 
     /**
-     * 打卡开始时间
+     * 请假结束日期
      */
-    private String startTime;
+    private Date endDate;
 
     /**
-     * 打卡结束时间
+     * 请假类型，如事假、病假、婚假等
      */
-    private String endTime;
+    private String leaveType;
 
     /**
-     * 打卡状态，如正常打卡、迟到、早退等
+     * 请假理由
+     */
+    private String reason;
+
+    /**
+     * 请假状态，如已申请、已批准、已驳回等
      */
     private String status;
 
     /**
-     * 打卡备注
+     * 请假备注
      */
     private String remark;
 }
