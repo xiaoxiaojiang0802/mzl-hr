@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "jiangjin")
+@ConfigurationProperties(prefix = "cdmzl")
 public class RuoYiConfig {
 
     /**

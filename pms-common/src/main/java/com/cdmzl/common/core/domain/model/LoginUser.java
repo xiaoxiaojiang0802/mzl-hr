@@ -14,7 +14,6 @@ import java.util.Set;
  *
  * @author ruoyi
  */
-
 @Data
 @NoArgsConstructor
 public class LoginUser implements Serializable {
