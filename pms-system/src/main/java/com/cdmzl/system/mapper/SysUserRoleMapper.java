@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author ruoyi
  */
-public interface SysUserRoleMapper extends BaseMapperPlus<SysUserRoleMapper, SysUserRole, SysUserRole> {
+public interface SysUserRoleMapper extends BaseMapperPlus<SysUserRoleMapper, SysUserRole> {
 
     List<Long> selectUserIdsByRoleId(Long roleId);
 

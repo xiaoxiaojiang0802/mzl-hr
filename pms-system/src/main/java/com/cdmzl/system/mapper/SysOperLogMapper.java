@@ -8,6 +8,6 @@ import com.cdmzl.system.domain.SysOperLog;
  *
  * @author ruoyi
  */
-public interface SysOperLogMapper extends BaseMapperPlus<SysOperLogMapper, SysOperLog, SysOperLog> {
+public interface SysOperLogMapper extends BaseMapperPlus<SysOperLogMapper, SysOperLog> {
 
 }

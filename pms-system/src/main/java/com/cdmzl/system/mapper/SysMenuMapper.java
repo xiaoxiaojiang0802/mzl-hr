@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author ruoyi
  */
-public interface SysMenuMapper extends BaseMapperPlus<SysMenuMapper, SysMenu, SysMenu> {
+public interface SysMenuMapper extends BaseMapperPlus<SysMenuMapper, SysMenu> {
 
     /**
      * 根据用户所有权限

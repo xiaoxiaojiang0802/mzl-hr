@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author ruoyi
  */
-public interface SysDeptMapper extends BaseMapperPlus<SysDeptMapper, SysDept, SysDept> {
+public interface SysDeptMapper extends BaseMapperPlus<SysDeptMapper, SysDept> {
 
     /**
      * 查询部门管理数据

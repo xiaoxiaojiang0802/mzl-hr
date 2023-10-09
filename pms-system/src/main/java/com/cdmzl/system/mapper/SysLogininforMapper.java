@@ -8,6 +8,6 @@ import com.cdmzl.system.domain.SysLogininfor;
  *
  * @author ruoyi
  */
-public interface SysLogininforMapper extends BaseMapperPlus<SysLogininforMapper, SysLogininfor, SysLogininfor> {
+public interface SysLogininforMapper extends BaseMapperPlus<SysLogininforMapper, SysLogininfor> {
 
 }

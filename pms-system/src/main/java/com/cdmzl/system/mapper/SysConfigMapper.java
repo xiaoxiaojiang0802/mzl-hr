@@ -8,6 +8,6 @@ import com.cdmzl.system.domain.SysConfig;
  *
  * @author ruoyi
  */
-public interface SysConfigMapper extends BaseMapperPlus<SysConfigMapper, SysConfig, SysConfig> {
+public interface SysConfigMapper extends BaseMapperPlus<SysConfigMapper, SysConfig> {
 
 }

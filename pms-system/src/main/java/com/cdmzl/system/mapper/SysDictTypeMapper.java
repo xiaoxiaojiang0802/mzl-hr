@@ -8,6 +8,6 @@ import com.cdmzl.common.core.mapper.BaseMapperPlus;
  *
  * @author ruoyi
  */
-public interface SysDictTypeMapper extends BaseMapperPlus<SysDictTypeMapper, SysDictType, SysDictType> {
+public interface SysDictTypeMapper extends BaseMapperPlus<SysDictTypeMapper, SysDictType> {
 
 }

@@ -1,2 +1,2 @@
-Application Version: ${jiangjin-vue-plus.version}
+Application Version: ${mzl-pms.version}
 Spring Boot Version: ${spring-boot.version}

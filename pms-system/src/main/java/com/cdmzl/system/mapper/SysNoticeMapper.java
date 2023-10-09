@@ -8,6 +8,6 @@ import com.cdmzl.system.domain.SysNotice;
  *
  * @author ruoyi
  */
-public interface SysNoticeMapper extends BaseMapperPlus<SysNoticeMapper, SysNotice, SysNotice> {
+public interface SysNoticeMapper extends BaseMapperPlus<SysNoticeMapper, SysNotice> {
 
 }

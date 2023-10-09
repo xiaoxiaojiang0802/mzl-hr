@@ -8,6 +8,6 @@ import com.cdmzl.system.domain.SysRoleMenu;
  *
  * @author ruoyi
  */
-public interface SysRoleMenuMapper extends BaseMapperPlus<SysRoleMenuMapper, SysRoleMenu, SysRoleMenu> {
+public interface SysRoleMenuMapper extends BaseMapperPlus<SysRoleMenuMapper, SysRoleMenu> {
 
 }

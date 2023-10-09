@@ -37,7 +37,7 @@ public class SysOssServiceImpl implements ISysOssService {
     @Override
     public TableDataInfo<SysOssVo> queryPageList(SysOssBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<SysOss> lqw = buildQueryWrapper(bo);
-        Page<SysOssVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<SysOssVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw, SysOssVo.class);
         return TableDataInfo.build(result);
     }
 
@@ -60,23 +60,24 @@ public class SysOssServiceImpl implements ISysOssService {
         lqw.like(StringUtils.isNotBlank(bo.getOriginalName()), SysOss::getOriginalName, bo.getOriginalName());
         lqw.eq(StringUtils.isNotBlank(bo.getFileSuffix()), SysOss::getFileSuffix, bo.getFileSuffix());
         lqw.eq(StringUtils.isNotBlank(bo.getUrl()), SysOss::getUrl, bo.getUrl());
-        lqw.between(params.get("beginCreateTime") != null && params.get("endCreateTime") != null,
-            SysOss::getCreateTime, params.get("beginCreateTime"), params.get("endCreateTime"));
+        lqw.between(params.get("beginCreateTime" ) != null && params.get("endCreateTime" ) != null,
+            SysOss::getCreateTime, params.get("beginCreateTime" ), params.get("endCreateTime" ));
         lqw.eq(StringUtils.isNotBlank(bo.getCreateBy()), SysOss::getCreateBy, bo.getCreateBy());
         lqw.eq(StringUtils.isNotBlank(bo.getService()), SysOss::getService, bo.getService());
         return lqw;
     }
 
-    @Cacheable(cacheNames = CacheNames.SYS_OSS, key = "#ossId")
+    @Cacheable(cacheNames = CacheNames.SYS_OSS, key = "#ossId" )
     @Override
     public SysOssVo getById(Long ossId) {
-        return baseMapper.selectVoById(ossId);
+        return baseMapper.selectVoById(ossId, SysOssVo.class);
     }
 
     @Override
     public SysOss upload(MultipartFile file) {
         String originalfileName = file.getOriginalFilename();
-        String suffix = StringUtils.substring(originalfileName, originalfileName.lastIndexOf("."), originalfileName.length());
+        assert originalfileName != null;
+        String suffix = StringUtils.substring(originalfileName, originalfileName.lastIndexOf("." ), originalfileName.length());
 //        OssClient storage = OssFactory.instance();
 //        UploadResult uploadResult;
 //        try {

@@ -11,6 +11,7 @@ import com.alibaba.excel.write.metadata.fill.FillConfig;
 import com.alibaba.excel.write.metadata.fill.FillWrapper;
 import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import com.cdmzl.common.convert.ExcelBigNumberConvert;
+import com.cdmzl.common.core.domain.BaseEntity;
 import com.cdmzl.common.excel.CellMergeStrategy;
 import com.cdmzl.common.excel.DefaultExcelListener;
 import com.cdmzl.common.excel.ExcelListener;
@@ -35,7 +36,7 @@ import java.util.Map;
  * @author ruoyi
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ExcelUtil {
+public class ExcelUtil<P extends BaseEntity> {
 
     /**
      * 同步导入(适用于小数据量)

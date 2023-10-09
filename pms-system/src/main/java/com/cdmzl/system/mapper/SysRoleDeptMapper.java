@@ -8,6 +8,6 @@ import com.cdmzl.system.domain.SysRoleDept;
  *
  * @author ruoyi
  */
-public interface SysRoleDeptMapper extends BaseMapperPlus<SysRoleDeptMapper, SysRoleDept, SysRoleDept> {
+public interface SysRoleDeptMapper extends BaseMapperPlus<SysRoleDeptMapper, SysRoleDept> {
 
 }
