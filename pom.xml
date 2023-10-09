@@ -283,6 +283,7 @@
         <module>pms-framework</module>
         <module>pms-system</module>
         <module>pms-common</module>
+        <module>pms-hr</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -35,20 +35,19 @@ import java.util.Objects;
  *
  * @param <M> mapper 泛型
  * @param <T> table 泛型
- * @param <V> vo 泛型
  * @author ruoyi
  * @since 2021-05-13
  */
-@SuppressWarnings("unchecked")
-public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
+@SuppressWarnings("unchecked" )
+public interface BaseMapperPlus<M, T> extends BaseMapper<T> {
 
     Log log = LogFactory.getLog(BaseMapperPlus.class);
 
     int DEFAULT_BATCH_SIZE = 1000;
 
-    default Class<V> currentVoClass() {
-        return (Class<V>) ReflectionKit.getSuperClassGenericType(this.getClass(), BaseMapperPlus.class, 2);
-    }
+//    default Class<V> currentVoClass() {
+//        return (Class<V>) ReflectionKit.getSuperClassGenericType(this.getClass(), BaseMapperPlus.class, 2);
+//    }
 
     default Class<T> currentModelClass() {
         return (Class<T>) ReflectionKit.getSuperClassGenericType(this.getClass(), BaseMapperPlus.class, 1);
@@ -114,9 +113,9 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
      */
     default boolean insertOrUpdateBatch(Collection<T> entityList, int batchSize) {
         TableInfo tableInfo = TableInfoHelper.getTableInfo(this.currentModelClass());
-        Assert.notNull(tableInfo, "error: can not execute. because can not find cache of TableInfo for entity!");
+        Assert.notNull(tableInfo, "error: can not execute. because can not find cache of TableInfo for entity!" );
         String keyProperty = tableInfo.getKeyProperty();
-        Assert.notEmpty(keyProperty, "error: can not execute. because can not find column for id from entity!");
+        Assert.notEmpty(keyProperty, "error: can not execute. because can not find column for id from entity!" );
         return SqlHelper.saveOrUpdateBatch(this.currentModelClass(), this.currentMapperClass(), log, entityList, batchSize, (sqlSession, entity) -> {
             Object idVal = tableInfo.getPropertyValue(entity, keyProperty);
             String sqlStatement = SqlHelper.getSqlStatement(this.currentMapperClass(), SqlMethod.SELECT_BY_ID);
@@ -136,18 +135,18 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
     default boolean insertOrUpdate(T entity) {
         if (null != entity) {
             TableInfo tableInfo = TableInfoHelper.getTableInfo(this.currentModelClass());
-            Assert.notNull(tableInfo, "error: can not execute. because can not find cache of TableInfo for entity!");
+            Assert.notNull(tableInfo, "error: can not execute. because can not find cache of TableInfo for entity!" );
             String keyProperty = tableInfo.getKeyProperty();
-            Assert.notEmpty(keyProperty, "error: can not execute. because can not find column for id from entity!");
+            Assert.notEmpty(keyProperty, "error: can not execute. because can not find column for id from entity!" );
             Object idVal = tableInfo.getPropertyValue(entity, tableInfo.getKeyProperty());
             return StringUtils.checkValNull(idVal) || Objects.isNull(selectById((Serializable) idVal)) ? insert(entity) > 0 : updateById(entity) > 0;
         }
         return false;
     }
 
-    default V selectVoById(Serializable id) {
-        return selectVoById(id, this.currentVoClass());
-    }
+//    default V selectVoById(Serializable id) {
+//        return selectVoById(id, this.currentVoClass());
+//    }
 
     /**
      * 根据 ID 查询
@@ -160,9 +159,6 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
         return BeanCopyUtils.copy(obj, voClass);
     }
 
-    default List<V> selectVoBatchIds(Collection<? extends Serializable> idList) {
-        return selectVoBatchIds(idList, this.currentVoClass());
-    }
 
     /**
      * 查询（根据ID 批量查询）
@@ -173,10 +169,6 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
             return CollUtil.newArrayList();
         }
         return BeanCopyUtils.copyList(list, voClass);
-    }
-
-    default List<V> selectVoByMap(Map<String, Object> map) {
-        return selectVoByMap(map, this.currentVoClass());
     }
 
     /**
@@ -190,9 +182,6 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
         return BeanCopyUtils.copyList(list, voClass);
     }
 
-    default V selectVoOne(Wrapper<T> wrapper) {
-        return selectVoOne(wrapper, this.currentVoClass());
-    }
 
     /**
      * 根据 entity 条件，查询一条记录
@@ -203,10 +192,6 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
             return null;
         }
         return BeanCopyUtils.copy(obj, voClass);
-    }
-
-    default List<V> selectVoList(Wrapper<T> wrapper) {
-        return selectVoList(wrapper, this.currentVoClass());
     }
 
     /**
@@ -220,9 +205,6 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
         return BeanCopyUtils.copyList(list, voClass);
     }
 
-    default <P extends IPage<V>> P selectVoPage(IPage<T> page, Wrapper<T> wrapper) {
-        return selectVoPage(page, wrapper, this.currentVoClass());
-    }
 
     /**
      * 分页查询VO
@@ -264,7 +246,7 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
                             wrapper.eq(key, value);
                         }
                     } catch (IllegalAccessException e) {
-                        log.error("拼接SQL发生错误!");
+                        log.error("拼接SQL发生错误!" );
                     }
                 }
             }
