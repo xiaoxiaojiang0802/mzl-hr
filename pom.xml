@@ -264,6 +264,12 @@
                 <artifactId>pms-system</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
+            <!-- 人事模块-->
+            <dependency>
+                <groupId>com.cdmzl</groupId>
+                <artifactId>pms-hr</artifactId>
+                <version>${mzl-pms.version}</version>
+            </dependency>
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.cdmzl</groupId>

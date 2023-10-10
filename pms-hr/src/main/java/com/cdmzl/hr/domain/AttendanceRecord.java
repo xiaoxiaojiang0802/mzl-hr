@@ -1,5 +1,6 @@
 package com.cdmzl.hr.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.cdmzl.common.actable.annotation.Column;
 import com.cdmzl.common.core.domain.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,6 +23,7 @@ public class AttendanceRecord extends BaseEntity {
     /**
      *
      */
+    @TableId
     private Long id;
 
     /**

@@ -54,6 +54,10 @@
             <groupId>com.cdmzl</groupId>
             <artifactId>pms-system</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cdmzl</groupId>
+            <artifactId>pms-hr</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
