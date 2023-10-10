@@ -94,7 +94,6 @@ public interface BaseMapperPlus<M, T> extends BaseMapper<T> {
         return SqlHelper.executeBatch(this.currentModelClass(), log, entityList, batchSize,
             (sqlSession, entity) -> sqlSession.insert(sqlStatement, entity));
     }
-
     /**
      * 批量更新(包含限制条数)
      */

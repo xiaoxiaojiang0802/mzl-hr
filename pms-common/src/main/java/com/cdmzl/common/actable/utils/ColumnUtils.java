@@ -1,11 +1,8 @@
 package com.cdmzl.common.actable.utils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.google.common.base.CaseFormat;
 import com.cdmzl.common.actable.annotation.*;
 import com.cdmzl.common.actable.annotation.impl.ColumnImpl;
 import com.cdmzl.common.actable.command.JavaToMysqlType;
@@ -13,6 +10,7 @@ import com.cdmzl.common.actable.command.MySqlTypeAndLength;
 import com.cdmzl.common.actable.constants.MySqlCharsetConstant;
 import com.cdmzl.common.actable.constants.MySqlEngineConstant;
 import com.cdmzl.common.actable.constants.MySqlTypeConstant;
+import com.google.common.base.CaseFormat;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.BeanUtils;
@@ -292,7 +290,6 @@ public class ColumnUtils {
         // 不参与建表的字段
         String[] excludeFields = excludeFields(clasz);
         // 当前属性名在排除建表的字段内
-        System.out.println(JSONObject.toJSONString(excludeFields) + "----" + field.getName() + Arrays.asList(excludeFields).contains(field.getName()));
         if (Arrays.asList(excludeFields).contains(field.getName())) {
             return false;
         }
