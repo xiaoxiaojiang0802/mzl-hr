@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cdmzl</groupId>
-    <artifactId>mzl-pms</artifactId>
+    <groupId>com.hr</groupId>
+    <artifactId>pms</artifactId>
     <version>1.0.0</version>
 
     <name>pms</name>
@@ -202,13 +202,6 @@
                 <artifactId>tencentcloud-sdk-java</artifactId>
                 <version>${tencent.sms.version}</version>
             </dependency>
-            <!-- xxl-job-core -->
-            <dependency>
-                <groupId>com.xuxueli</groupId>
-                <artifactId>xxl-job-core</artifactId>
-                <version>${xxl-job.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.yomahub</groupId>
                 <artifactId>tlog-web-spring-boot-starter</artifactId>
@@ -241,37 +234,37 @@
             </dependency>
             <!-- 定时任务 -->
             <dependency>
-                <groupId>com.cdmzl</groupId>
+                <groupId>com.hr</groupId>
                 <artifactId>pms-job</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.cdmzl</groupId>
+                <groupId>com.hr</groupId>
                 <artifactId>pms-generator</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.cdmzl</groupId>
+                <groupId>com.hr</groupId>
                 <artifactId>pms-framework</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.cdmzl</groupId>
+                <groupId>com.hr</groupId>
                 <artifactId>pms-system</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 人事模块-->
             <dependency>
-                <groupId>com.cdmzl</groupId>
+                <groupId>com.hr</groupId>
                 <artifactId>pms-hr</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.cdmzl</groupId>
+                <groupId>com.hr</groupId>
                 <artifactId>pms-common</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
