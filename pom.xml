@@ -30,7 +30,6 @@
         <lock4j.version>2.2.2</lock4j.version>
         <dynamic-ds.version>3.5.2</dynamic-ds.version>
         <tlog.version>1.4.3</tlog.version>
-        <xxl-job.version>2.3.1</xxl-job.version>
         <lombok.version>1.18.24</lombok.version>
         <fastjson.version>1.2.83</fastjson.version>
         <swagger-annotations.version>1.5.22</swagger-annotations.version>
