@@ -4,12 +4,13 @@
       <el-col :xs="24" :sm="24" :lg="16">
         <el-row>
           <el-col>
-            <el-button>默认按钮</el-button>
-            <el-button type="primary">主要按钮</el-button>
-            <el-button type="success">成功按钮</el-button>
-            <el-button type="info">信息按钮</el-button>
-            <el-button type="warning">警告按钮</el-button>
-            <el-button type="danger">危险按钮</el-button> </el-col>
+            <el-button v-hasPermi="['system:config:add']" type="primary">审批</el-button>
+            <el-button v-hasPermi="['system:config:add']" type="primary">入职</el-button>
+            <el-button v-hasPermi="['system:config:add']" type="primary">请假</el-button>
+            <el-button v-hasPermi="['system:config:add']" type="primary">外出</el-button>
+            <el-button v-hasPermi="['system:config:add']" type="primary">加班</el-button>
+            <el-button v-hasPermi="['system:config:add']" type="primary">公出</el-button> 
+          </el-col>
         </el-row>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
