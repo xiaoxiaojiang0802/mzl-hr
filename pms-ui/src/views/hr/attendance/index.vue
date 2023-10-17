@@ -25,7 +25,7 @@
                                     placeholder="请选择打卡日期">
                     </el-date-picker>
                   </el-form-item>
-                  <el-form-item label="打卡开始时间" prop="startTime">
+                  <el-form-item label="开始时间" prop="startTime">
                     <el-date-picker clearable
                                     v-model="queryParams.startTime"
                                     type="date"
@@ -33,7 +33,7 @@
                                     placeholder="请选择打卡开始时间">
                     </el-date-picker>
                   </el-form-item>
-                  <el-form-item label="打卡结束时间" prop="endTime">
+                  <el-form-item label="结束时间" prop="endTime">
                     <el-date-picker clearable
                                     v-model="queryParams.endTime"
                                     type="date"
@@ -86,7 +86,7 @@
                   <span>{{ parseTime(scope.row.date, '{y}-{m}-{d}') }}</span>
                 </template>
               </el-table-column>
-              <el-table-column label="打卡开始时间" align="center" prop="startTime" width="180">
+              <el-table-column label="打卡开时间" align="center" prop="startTime" width="180">
                 <template slot-scope="scope">
                   <span>{{ parseTime(scope.row.startTime, '{y}-{m}-{d}') }}</span>
                 </template>
