@@ -4,8 +4,8 @@
       <el-col :xs="24" :sm="24" :lg="16">
         <el-row>
           <el-col>
-            <el-button v-hasPermi="['system:config:add']" type="primary">审批</el-button>
-            <el-button v-hasPermi="['system:config:add']" type="primary">入职</el-button>
+            <el-button v-hasPermi="['system:config:add']"  type="primary">审批</el-button> 
+            <el-button v-hasPermi="['system:config:add']" @click="goPage('/user-add')" type="primary">入职</el-button>
             <el-button v-hasPermi="['system:config:add']" type="primary">请假</el-button>
             <el-button v-hasPermi="['system:config:add']" type="primary">外出</el-button>
             <el-button v-hasPermi="['system:config:add']" type="primary">加班</el-button>
@@ -29,12 +29,13 @@
     },
     data() {
       return {
-        lineChartData: lineChartData.newVisitis,
         date: new Date()
       }
     },
     methods: {
-
+      goPage(url){
+        this.$router.push(url).catch(()=>{});
+      }
     }
   }
 </script>

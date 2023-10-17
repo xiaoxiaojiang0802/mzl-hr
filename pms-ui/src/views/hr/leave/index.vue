@@ -17,7 +17,7 @@
                         @keyup.enter.native="handleQuery"
                     />
                   </el-form-item>
-                  <el-form-item label="请假开始日期" prop="startDate">
+                  <el-form-item label="开始日期" prop="startDate">
                     <el-date-picker clearable
                                     v-model="queryParams.startDate"
                                     type="date"
@@ -25,21 +25,13 @@
                                     placeholder="请选择请假开始日期">
                     </el-date-picker>
                   </el-form-item>
-                  <el-form-item label="请假结束日期" prop="endDate">
+                  <el-form-item label="结束日期" prop="endDate">
                     <el-date-picker clearable
                                     v-model="queryParams.endDate"
                                     type="date"
                                     value-format="yyyy-MM-dd"
                                     placeholder="请选择请假结束日期">
                     </el-date-picker>
-                  </el-form-item>
-                  <el-form-item label="请假理由" prop="reason">
-                    <el-input
-                        v-model="queryParams.reason"
-                        placeholder="请输入请假理由"
-                        clearable
-                        @keyup.enter.native="handleQuery"
-                    />
                   </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -81,20 +73,20 @@
               <el-table-column label="" align="center" prop="id"/>
               <el-table-column label="员工姓名" align="center" prop="employeeName"/>
               <el-table-column label="所属部门" align="center" prop="department"/>
-              <el-table-column label="请假开始日期" align="center" prop="startDate" width="180">
+              <el-table-column label="开始日期" align="center" prop="startDate" width="180">
                 <template slot-scope="scope">
                   <span>{{ parseTime(scope.row.startDate, '{y}-{m}-{d}') }}</span>
                 </template>
               </el-table-column>
-              <el-table-column label="请假结束日期" align="center" prop="endDate" width="180">
+              <el-table-column label="结束日期" align="center" prop="endDate" width="180">
                 <template slot-scope="scope">
                   <span>{{ parseTime(scope.row.endDate, '{y}-{m}-{d}') }}</span>
                 </template>
               </el-table-column>
-              <el-table-column label="请假类型，如事假、病假、婚假等" align="center" prop="leaveType"/>
-              <el-table-column label="请假理由" align="center" prop="reason"/>
-              <el-table-column label="请假状态，如已申请、已批准、已驳回等" align="center" prop="status"/>
-              <el-table-column label="请假备注" align="center" prop="remark"/>
+              <el-table-column label="类型" align="center" prop="leaveType"/>
+              <el-table-column label="理由" align="center" prop="reason"/>
+              <el-table-column label="状态" align="center" prop="status"/>
+              <el-table-column label="备注" align="center" prop="remark"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -134,7 +126,7 @@
                         <el-form-item label="所属部门" prop="department">
                           <el-input v-model="form.department" placeholder="请输入所属部门"/>
                         </el-form-item>
-                        <el-form-item label="请假开始日期" prop="startDate">
+                        <el-form-item label="开始日期" prop="startDate">
                           <el-date-picker clearable
                                           v-model="form.startDate"
                                           type="date"
@@ -142,7 +134,7 @@
                                           placeholder="请选择请假开始日期">
                           </el-date-picker>
                         </el-form-item>
-                        <el-form-item label="请假结束日期" prop="endDate">
+                        <el-form-item label="结束日期" prop="endDate">
                           <el-date-picker clearable
                                           v-model="form.endDate"
                                           type="date"
@@ -150,10 +142,10 @@
                                           placeholder="请选择请假结束日期">
                           </el-date-picker>
                         </el-form-item>
-                        <el-form-item label="请假理由" prop="reason">
+                        <el-form-item label="理由" prop="reason">
                           <el-input v-model="form.reason" placeholder="请输入请假理由"/>
                         </el-form-item>
-                        <el-form-item label="请假备注" prop="remark">
+                        <el-form-item label="备注" prop="remark">
                           <el-input v-model="form.remark" placeholder="请输入请假备注"/>
                         </el-form-item>
       </el-form>

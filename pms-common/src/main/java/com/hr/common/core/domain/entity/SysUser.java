@@ -124,6 +124,17 @@ public class SysUser extends BaseEntity {
      */
     @Column
     private String loginIp;
+    /**
+     * 入职时间
+     */
+    @Column
+    private Date entry;
+
+    /**
+     * 合同到期
+     */
+    @Column
+    private Date due;
 
     /**
      * 最后登录时间
