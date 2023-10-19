@@ -25,6 +25,8 @@ public interface ISysUserService {
      */
     List<SysUser> selectUserList(SysUser user);
 
+    String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName);
+
     /**
      * 根据条件分页查询已分配用户角色列表
      *

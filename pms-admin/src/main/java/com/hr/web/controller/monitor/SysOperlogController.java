@@ -5,6 +5,7 @@ import com.hr.common.annotation.Log;
 import com.hr.common.core.controller.BaseController;
 import com.hr.common.core.domain.PageQuery;
 import com.hr.common.core.domain.R;
+import com.hr.common.core.domain.entity.SysUser;
 import com.hr.common.core.page.TableDataInfo;
 import com.hr.common.enums.BusinessType;
 import com.hr.common.utils.poi.ExcelUtil;
@@ -47,11 +48,13 @@ public class SysOperlogController extends BaseController {
     @PostMapping("/export")
     public void export(SysOperLog operLog, HttpServletResponse response) {
         List<SysOperLog> list = operLogService.selectOperLogList(operLog);
-        ExcelUtil.exportExcel(list, "操作日志", SysOperLog.class, response);
+        ExcelUtil<SysOperLog> util = new ExcelUtil<>(SysOperLog.class);
+        util.exportExcel(response, list, "操作日志");
     }
 
     /**
      * 批量删除操作日志记录
+     *
      * @param operIds 日志ids
      */
     @Log(title = "操作日志", businessType = BusinessType.DELETE)

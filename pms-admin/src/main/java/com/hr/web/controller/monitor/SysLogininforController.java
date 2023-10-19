@@ -6,6 +6,7 @@ import com.hr.common.constant.CacheConstants;
 import com.hr.common.core.controller.BaseController;
 import com.hr.common.core.domain.PageQuery;
 import com.hr.common.core.domain.R;
+import com.hr.common.core.domain.entity.SysUser;
 import com.hr.common.core.page.TableDataInfo;
 import com.hr.common.enums.BusinessType;
 import com.hr.common.utils.poi.ExcelUtil;
@@ -48,11 +49,14 @@ public class SysLogininforController extends BaseController {
     @PostMapping("/export")
     public void export(SysLogininfor logininfor, HttpServletResponse response) {
         List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
-        ExcelUtil.exportExcel(list, "登录日志", SysLogininfor.class, response);
+//        ExcelUtil.exportExcel(list, "登录日志", SysLogininfor.class, response);
+        ExcelUtil<SysLogininfor> util = new ExcelUtil<>(SysLogininfor.class);
+        util.exportExcel(response, list, "登录日志");
     }
 
     /**
      * 批量删除登录日志
+     *
      * @param infoIds 日志ids
      */
     @SaCheckPermission("monitor:logininfor:remove")

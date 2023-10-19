@@ -1,5 +1,6 @@
 package com.hr.system.service.impl;
 
+import cn.dev33.satoken.secure.BCrypt;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -19,19 +20,24 @@ import com.hr.common.core.page.TableDataInfo;
 import com.hr.common.exception.ServiceException;
 import com.hr.common.helper.DataBaseHelper;
 import com.hr.common.helper.LoginHelper;
-import com.hr.common.utils.BeanCopyUtils;
+import com.hr.common.utils.bean.BeanCopyUtils;
 import com.hr.common.utils.StreamUtils;
 import com.hr.common.utils.StringUtils;
+import com.hr.common.utils.bean.BeanValidators;
+import com.hr.common.utils.spring.SpringUtils;
 import com.hr.system.domain.SysPost;
 import com.hr.system.domain.SysUserPost;
 import com.hr.system.domain.SysUserRole;
 import com.hr.system.mapper.*;
+import com.hr.system.service.ISysConfigService;
 import com.hr.system.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +59,8 @@ public class SysUserServiceImpl implements ISysUserService {
     private final SysPostMapper postMapper;
     private final SysUserRoleMapper userRoleMapper;
     private final SysUserPostMapper userPostMapper;
+    @Autowired
+    protected Validator validator;
 
     @Override
     public TableDataInfo<SysUser> selectPageUserList(SysUser user, PageQuery pageQuery) {
@@ -69,6 +77,64 @@ public class SysUserServiceImpl implements ISysUserService {
     @Override
     public List<SysUser> selectUserList(SysUser user) {
         return baseMapper.selectUserList(this.buildQueryWrapper(user));
+    }
+
+    /**
+     * 导入用户数据
+     *
+     * @param userList        用户数据列表
+     * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
+     * @param operName        操作用户
+     * @return 结果
+     */
+    @Override
+    public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName) {
+        if (StringUtils.isNull(userList) || userList.size() == 0) {
+            throw new ServiceException("导入用户数据不能为空！");
+        }
+        int successNum = 0;
+        int failureNum = 0;
+        StringBuilder successMsg = new StringBuilder();
+        StringBuilder failureMsg = new StringBuilder();
+        String initPassword = SpringUtils.getBean(ISysConfigService.class).selectConfigByKey("sys.user.initPassword");
+        String password = BCrypt.hashpw(initPassword);
+        for (SysUser user : userList) {
+            try {
+                // 验证是否存在这个用户
+                SysUser u = baseMapper.selectUserByUserName(user.getUserName());
+                if (StringUtils.isNull(u)) {
+                    BeanValidators.validateWithException(validator, user);
+                    user.setPassword(password);
+                    user.setCreateBy(operName);
+                    this.insertUser(user);
+                    successNum++;
+                    successMsg.append("<br/>").append(successNum).append("、账号 ").append(user.getUserName()).append(" 导入成功");
+                } else if (isUpdateSupport) {
+                    BeanValidators.validateWithException(validator, user);
+                    checkUserAllowed(user);
+                    checkUserDataScope(user.getUserId());
+                    user.setUpdateBy(operName);
+                    this.updateUser(user);
+                    successNum++;
+                    successMsg.append("<br/>").append(successNum).append("、账号 ").append(user.getUserName()).append(" 更新成功");
+                } else {
+                    failureNum++;
+                    failureMsg.append("<br/>").append(failureNum).append("、账号 ").append(user.getUserName()).append(" 已存在");
+                }
+            } catch (Exception e) {
+                failureNum++;
+                String msg = "<br/>" + failureNum + "、账号 " + user.getUserName() + " 导入失败：";
+                failureMsg.append(msg).append(e.getMessage());
+                log.error(msg, e);
+            }
+        }
+        if (failureNum > 0) {
+            failureMsg.insert(0, "很抱歉，导入失败！共 " + failureNum + " 条数据格式不正确，错误如下：");
+            throw new ServiceException(failureMsg.toString());
+        } else {
+            successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
+        }
+        return successMsg.toString();
     }
 
     private Wrapper<SysUser> buildQueryWrapper(SysUser user) {

@@ -72,5 +72,10 @@ public interface Constants {
      */
     String TOKEN = "token";
 
+    /**
+     * 资源映射路径 前缀
+     */
+    String RESOURCE_PREFIX = "/profile";
+
 }
 

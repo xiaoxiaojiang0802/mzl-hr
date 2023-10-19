@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hr.common.core.controller.BaseController;
 import com.hr.common.core.domain.R;
+import com.hr.common.core.domain.entity.SysUser;
 import com.hr.common.utils.poi.ExcelUtil;
 import com.hr.hr.domain.AttendanceRecord;
 import com.hr.hr.service.AttendanceRecordService;
@@ -21,15 +22,15 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/hr/attendance" )
+@RequestMapping("/hr/attendance")
 public class AttendanceRecordController extends BaseController {
 
-    private final  AttendanceRecordService attendanceRecordService;
+    private final AttendanceRecordService attendanceRecordService;
 
     /**
      * 查询打卡记录列表
      */
-    @GetMapping("/page" )
+    @GetMapping("/page")
     public R page(Page page, AttendanceRecord attendanceRecord) {
         return R.ok(attendanceRecordService.page(page, Wrappers.query(attendanceRecord)));
     }
@@ -37,17 +38,18 @@ public class AttendanceRecordController extends BaseController {
     /**
      * 导出打卡记录列表
      */
-    @PostMapping("/export" )
+    @PostMapping("/export")
     public void export(HttpServletResponse response, AttendanceRecord attendanceRecord) {
         List<AttendanceRecord> list = attendanceRecordService.list(Wrappers.query(attendanceRecord));
-        ExcelUtil.exportExcel(list, "打卡记录数据", AttendanceRecord.class, response);
+        ExcelUtil<AttendanceRecord> util = new ExcelUtil<>(AttendanceRecord.class);
+        util.exportExcel(response, list, "打卡记录");
     }
 
     /**
      * 获取打卡记录详细信息
      */
-    @GetMapping(value = "getById/{id}" )
-    public R getById(@PathVariable("id" ) Long id) {
+    @GetMapping(value = "getById/{id}")
+    public R getById(@PathVariable("id") Long id) {
         return R.ok(attendanceRecordService.getById(id));
     }
 
@@ -70,8 +72,8 @@ public class AttendanceRecordController extends BaseController {
     /**
      * 删除打卡记录
      */
-    @DeleteMapping("/removeByIds/{ids}" )
-    public R removeByIds(@PathVariable("ids" ) List<Long> ids) {
+    @DeleteMapping("/removeByIds/{ids}")
+    public R removeByIds(@PathVariable("ids") List<Long> ids) {
         return R.ok(attendanceRecordService.removeByIds(ids));
     }
 }

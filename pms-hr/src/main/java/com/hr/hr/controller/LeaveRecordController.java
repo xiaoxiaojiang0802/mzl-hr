@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hr.common.core.controller.BaseController;
 import com.hr.common.core.domain.R;
 import com.hr.common.utils.poi.ExcelUtil;
+import com.hr.hr.domain.AttendanceRecord;
 import com.hr.hr.domain.LeaveRecord;
 import com.hr.hr.service.LeaveRecordService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/hr/leave" )
+@RequestMapping("/hr/leave")
 public class LeaveRecordController extends BaseController {
 
     private final LeaveRecordService leaveRecordService;
@@ -29,7 +30,7 @@ public class LeaveRecordController extends BaseController {
     /**
      * 查询请假记录列表
      */
-    @GetMapping("/page" )
+    @GetMapping("/page")
     public R page(Page page, LeaveRecord leaveRecord) {
         return R.ok(leaveRecordService.page(page, Wrappers.query(leaveRecord)));
     }
@@ -37,17 +38,18 @@ public class LeaveRecordController extends BaseController {
     /**
      * 导出请假记录列表
      */
-    @PostMapping("/export" )
+    @PostMapping("/export")
     public void export(HttpServletResponse response, LeaveRecord leaveRecord) {
         List<LeaveRecord> list = leaveRecordService.list(Wrappers.query(leaveRecord));
-        ExcelUtil.exportExcel(list, "请假记录数据" , LeaveRecord.class, response);
+        ExcelUtil<LeaveRecord> util = new ExcelUtil<>(LeaveRecord.class);
+        util.exportExcel(response, list, "请假记录");
     }
 
     /**
      * 获取请假记录详细信息
      */
-    @GetMapping(value = "getById/{id}" )
-    public R getById(@PathVariable("id" ) Long id) {
+    @GetMapping(value = "getById/{id}")
+    public R getById(@PathVariable("id") Long id) {
         return R.ok(leaveRecordService.getById(id));
     }
 
@@ -70,8 +72,8 @@ public class LeaveRecordController extends BaseController {
     /**
      * 删除请假记录
      */
-    @DeleteMapping("/removeByIds/{ids}" )
-    public R removeByIds(@PathVariable("ids" ) List<Long> ids) {
+    @DeleteMapping("/removeByIds/{ids}")
+    public R removeByIds(@PathVariable("ids") List<Long> ids) {
         return R.ok(leaveRecordService.removeByIds(ids));
     }
 }

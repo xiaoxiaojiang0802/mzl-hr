@@ -3,6 +3,7 @@ package com.hr.common.convert;
 import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.excel.converters.Converter;
 import com.alibaba.excel.enums.CellDataTypeEnum;
 import com.alibaba.excel.metadata.GlobalConfiguration;
@@ -62,7 +63,7 @@ public class ExcelDictConvert implements Converter<Object> {
         if (StringUtils.isBlank(type)) {
             label = ExcelUtil.convertByExp(value, anno.readConverterExp(), anno.separator());
         } else {
-            label = SpringUtils.getBean(DictService.class).getDictLabel(type, value, anno.separator());
+            label = SpringUtil.getBean(DictService.class).getDictLabel(type, value, anno.separator());
         }
         return new WriteCellData<>(label);
     }

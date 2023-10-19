@@ -15,6 +15,7 @@ import com.hr.common.core.page.TableDataInfo;
 import com.hr.common.enums.BusinessType;
 import com.hr.common.helper.LoginHelper;
 import com.hr.common.utils.poi.ExcelUtil;
+import com.hr.system.domain.SysPost;
 import com.hr.system.domain.SysUserRole;
 import com.hr.system.service.ISysDeptService;
 import com.hr.system.service.ISysRoleService;
@@ -62,7 +63,8 @@ public class SysRoleController extends BaseController {
     @PostMapping("/export")
     public void export(SysRole role, HttpServletResponse response) {
         List<SysRole> list = roleService.selectRoleList(role);
-        ExcelUtil.exportExcel(list, "角色数据", SysRole.class, response);
+        ExcelUtil<SysRole> util = new ExcelUtil<>(SysRole.class);
+        util.exportExcel(response, list, "角色数据");
     }
 
     /**

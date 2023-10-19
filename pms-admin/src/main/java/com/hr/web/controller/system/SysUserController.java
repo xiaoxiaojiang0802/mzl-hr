@@ -74,16 +74,9 @@ public class SysUserController extends BaseController {
     @PostMapping("/export")
     public void export(SysUser user, HttpServletResponse response) {
         List<SysUser> list = userService.selectUserList(user);
-        List<SysUserExportVo> listVo = BeanUtil.copyToList(list, SysUserExportVo.class);
-        for (int i = 0; i < list.size(); i++) {
-            SysDept dept = list.get(i).getDept();
-            SysUserExportVo vo = listVo.get(i);
-            if (ObjectUtil.isNotEmpty(dept)) {
-                vo.setDeptName(dept.getDeptName());
-                vo.setLeader(dept.getLeader());
-            }
-        }
-        ExcelUtil.exportExcel(listVo, "用户数据", SysUserExportVo.class, response);
+        ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
+        util.exportExcel(response, list, "用户数据");
+
     }
 
     /**
@@ -96,8 +89,11 @@ public class SysUserController extends BaseController {
     @SaCheckPermission("system:user:import")
     @PostMapping(value = "/importData", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public R<Void> importData(@RequestPart("file") MultipartFile file, boolean updateSupport) throws Exception {
-        ExcelResult<SysUserImportVo> result = ExcelUtil.importExcel(file.getInputStream(), SysUserImportVo.class, new SysUserImportListener(updateSupport));
-        return R.ok(result.getAnalysis());
+        ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
+        List<SysUser> userList = util.importExcel(file.getInputStream());
+        String operName = getUsername();
+        String message = userService.importUser(userList, updateSupport, operName);
+        return R.ok(message);
     }
 
     /**
@@ -105,7 +101,8 @@ public class SysUserController extends BaseController {
      */
     @PostMapping("/importTemplate")
     public void importTemplate(HttpServletResponse response) {
-        ExcelUtil.exportExcel(new ArrayList<>(), "用户数据", SysUserImportVo.class, response);
+        ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
+        util.importTemplateExcel(response, "用户数据");
     }
 
     /**

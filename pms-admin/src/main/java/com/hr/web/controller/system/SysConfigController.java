@@ -6,6 +6,7 @@ import com.hr.common.constant.UserConstants;
 import com.hr.common.core.controller.BaseController;
 import com.hr.common.core.domain.PageQuery;
 import com.hr.common.core.domain.R;
+import com.hr.common.core.domain.entity.SysUser;
 import com.hr.common.core.page.TableDataInfo;
 import com.hr.common.enums.BusinessType;
 import com.hr.common.utils.poi.ExcelUtil;
@@ -48,7 +49,8 @@ public class SysConfigController extends BaseController {
     @PostMapping("/export")
     public void export(SysConfig config, HttpServletResponse response) {
         List<SysConfig> list = configService.selectConfigList(config);
-        ExcelUtil.exportExcel(list, "参数数据", SysConfig.class, response);
+        ExcelUtil<SysConfig> util = new ExcelUtil<>(SysConfig.class);
+        util.exportExcel(response, list, "参数数据");
     }
 
     /**

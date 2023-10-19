@@ -17,7 +17,7 @@ import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.hr.common.actable.annotation.Like;
 import com.hr.common.actable.utils.CommonUtil;
 import com.hr.common.actable.utils.FieldUtils;
-import com.hr.common.utils.BeanCopyUtils;
+import com.hr.common.utils.bean.BeanCopyUtils;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;

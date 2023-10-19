@@ -7,6 +7,7 @@ import com.hr.common.core.controller.BaseController;
 import com.hr.common.core.domain.PageQuery;
 import com.hr.common.core.domain.R;
 import com.hr.common.core.domain.entity.SysDictData;
+import com.hr.common.core.domain.entity.SysUser;
 import com.hr.common.core.page.TableDataInfo;
 import com.hr.common.enums.BusinessType;
 import com.hr.common.utils.poi.ExcelUtil;
@@ -51,7 +52,8 @@ public class SysDictDataController extends BaseController {
     @PostMapping("/export")
     public void export(SysDictData dictData, HttpServletResponse response) {
         List<SysDictData> list = dictDataService.selectDictDataList(dictData);
-        ExcelUtil.exportExcel(list, "字典数据", SysDictData.class, response);
+        ExcelUtil<SysDictData> util = new ExcelUtil<>(SysDictData.class);
+        util.exportExcel(response, list, "字典数据");
     }
 
     /**

@@ -6,6 +6,7 @@ import com.hr.common.constant.UserConstants;
 import com.hr.common.core.controller.BaseController;
 import com.hr.common.core.domain.PageQuery;
 import com.hr.common.core.domain.R;
+import com.hr.common.core.domain.entity.SysDictType;
 import com.hr.common.core.page.TableDataInfo;
 import com.hr.common.enums.BusinessType;
 import com.hr.common.utils.poi.ExcelUtil;
@@ -48,7 +49,8 @@ public class SysPostController extends BaseController {
     @PostMapping("/export")
     public void export(SysPost post, HttpServletResponse response) {
         List<SysPost> list = postService.selectPostList(post);
-        ExcelUtil.exportExcel(list, "岗位数据", SysPost.class, response);
+        ExcelUtil<SysPost> util = new ExcelUtil<>(SysPost.class);
+        util.exportExcel(response, list, "岗位数据");
     }
 
     /**
