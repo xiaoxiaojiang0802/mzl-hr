@@ -88,6 +88,15 @@
         </el-col>
       </el-row>
       <el-row>
+        <el-col :span="12">
+          <el-form-item label="直接上级">
+            <el-select v-model="form.superiorId"  placeholder="请选择直接上级">
+              <el-option v-for="item in userList" :key="item.userId" :label="item.nickName" :value="item.userId"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="24">
           <el-form-item label="备注">
             <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
@@ -133,7 +142,7 @@
         multiple: true,
         showSearch: true,
         total: 0,
-        userList: null,
+        userList: [],
         title: "",
         deptOptions: undefined,
         open: false,
@@ -173,48 +182,6 @@
           status: undefined,
           deptId: undefined
         },
-        // 列信息
-        columns: [{
-            key: 0,
-            label: `用户编号`,
-            visible: true
-          },
-          {
-            key: 1,
-            label: `用户名称`,
-            visible: true
-          },
-          {
-            key: 2,
-            label: `用户昵称`,
-            visible: true
-          },
-          {
-            key: 3,
-            label: `部门`,
-            visible: true
-          },
-          {
-            key: 4,
-            label: `手机号码`,
-            visible: true
-          },
-          {
-            key: 5,
-            label: `状态`,
-            visible: true
-          },
-          {
-            key: 6,
-            label: `创建时间`,
-            visible: true
-          },
-          {
-            key: 7,
-            label: `入职时间`,
-            visible: true
-          }
-        ],
         // 表单校验
         rules: {
           userName: [{
@@ -268,11 +235,21 @@
     created() {
       this.handleAdd();
       this.getDeptTree();
+      this.listUser();
       this.getConfigKey("sys.user.initPassword").then(response => {
         this.initPassword = response.msg;
       });
     },
     methods: {
+      listUser(){
+        this.loading = true;
+        listUser({}).then(response => {
+            this.userList = response.rows;
+            this.total = response.total;
+            this.loading = false;
+          }
+        );
+      },
       /** 查询部门下拉树结构 */
       getDeptTree() {
         deptTreeSelect().then(response => {

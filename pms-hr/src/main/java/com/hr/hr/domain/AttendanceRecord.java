@@ -21,6 +21,7 @@ import java.util.Date;
 @Data
 @Table
 public class AttendanceRecord extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
     /**

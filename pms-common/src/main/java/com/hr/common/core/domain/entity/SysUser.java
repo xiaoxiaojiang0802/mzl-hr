@@ -42,6 +42,11 @@ public class SysUser extends BaseEntity {
      */
     @Column
     private Long deptId;
+    /**
+     * 直接上级ID
+     */
+    @Column
+    private Long superiorId;
 
     /**
      * 登录账号
