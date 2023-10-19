@@ -7,7 +7,6 @@ import com.hr.common.annotation.Excel.Type;
 import com.hr.common.annotation.Excels;
 import com.hr.common.config.RuoYiConfig;
 import com.hr.common.core.domain.R;
-import com.hr.common.core.domain.entity.SysUser;
 import com.hr.common.core.service.DictService;
 import com.hr.common.core.text.Convert;
 import com.hr.common.exception.UtilException;
@@ -763,7 +762,7 @@ public class ExcelUtil<T> {
             if (StringUtils.isNotEmpty(imagePath)) {
                 byte[] data = ImageUtils.getImage(imagePath);
                 getDrawingPatriarch(cell.getSheet()).createPicture(anchor,
-                        cell.getSheet().getWorkbook().addPicture(data, getImageType(data)));
+                    cell.getSheet().getWorkbook().addPicture(data, getImageType(data)));
             }
         }
     }

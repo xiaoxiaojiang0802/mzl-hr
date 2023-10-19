@@ -2,6 +2,8 @@ package com.hr.hr.domain;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.hr.common.actable.annotation.Column;
+import com.hr.common.actable.annotation.Table;
+import com.hr.common.annotation.Excel;
 import com.hr.common.core.domain.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -17,6 +19,7 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Table
 public class AttendanceRecord extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -27,42 +30,25 @@ public class AttendanceRecord extends BaseEntity {
     private Long id;
 
     /**
-     * 员工姓名
+     * 工号
      */
-    @Column(comment = "员工姓名" )
-    private String employeeName;
+    @Excel(name = "工号")
+    @Column(comment = "工号")
+    private String employeeNumber;
 
     /**
-     * 所属部门
+     * 员工姓名
      */
-    @Column(comment = "所属部门" )
-    private String department;
+    @Excel(name = "员工姓名")
+    @Column(comment = "员工姓名")
+    private String employeeName;
 
     /**
      * 打卡日期
      */
-    @JsonFormat(pattern = "yyyy-MM-dd" )
-    @Column(comment = "打卡日期" )
+    @Excel(name = "打卡日期", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(comment = "打卡日期")
     private Date date;
-
-    /**
-     * 打卡开始时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd" )
-    @Column(comment = "打卡开始时间" )
-    private Date startTime;
-
-    /**
-     * 打卡结束时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd" )
-    @Column(comment = "打卡结束时间" )
-    private Date endTime;
-
-    /**
-     * 打卡状态
-     */
-    @Column(comment = "打卡状态" )
-    private String status;
 
 }

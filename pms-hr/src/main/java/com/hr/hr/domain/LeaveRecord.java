@@ -2,6 +2,7 @@ package com.hr.hr.domain;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.hr.common.actable.annotation.Column;
+import com.hr.common.actable.annotation.Table;
 import com.hr.common.core.domain.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -17,6 +18,7 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Table
 public class LeaveRecord extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

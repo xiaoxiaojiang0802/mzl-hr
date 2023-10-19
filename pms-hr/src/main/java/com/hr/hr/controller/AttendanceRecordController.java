@@ -1,15 +1,20 @@
 package com.hr.hr.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hr.common.annotation.Log;
 import com.hr.common.core.controller.BaseController;
 import com.hr.common.core.domain.R;
 import com.hr.common.core.domain.entity.SysUser;
+import com.hr.common.enums.BusinessType;
 import com.hr.common.utils.poi.ExcelUtil;
 import com.hr.hr.domain.AttendanceRecord;
 import com.hr.hr.service.AttendanceRecordService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -43,6 +48,28 @@ public class AttendanceRecordController extends BaseController {
         List<AttendanceRecord> list = attendanceRecordService.list(Wrappers.query(attendanceRecord));
         ExcelUtil<AttendanceRecord> util = new ExcelUtil<>(AttendanceRecord.class);
         util.exportExcel(response, list, "打卡记录");
+    }
+
+    /**
+     * 导入数据
+     *
+     * @param file 导入文件
+     */
+    @PostMapping(value = "/importData", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public R<Void> importData(@RequestPart("file") MultipartFile file) throws Exception {
+        ExcelUtil<AttendanceRecord> util = new ExcelUtil<>(AttendanceRecord.class);
+        List<AttendanceRecord> attendanceRecordList = util.importExcel(file.getInputStream());
+        attendanceRecordService.saveBatch(attendanceRecordList);
+        return R.ok();
+    }
+
+    /**
+     * 获取导入模板
+     */
+    @PostMapping("/importTemplate")
+    public void importTemplate(HttpServletResponse response) {
+        ExcelUtil<AttendanceRecord> util = new ExcelUtil<>(AttendanceRecord.class);
+        util.importTemplateExcel(response, "打卡记录");
     }
 
     /**

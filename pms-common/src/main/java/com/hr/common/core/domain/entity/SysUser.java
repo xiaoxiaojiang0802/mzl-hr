@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.hr.common.actable.annotation.Column;
 import com.hr.common.actable.annotation.Like;
 import com.hr.common.actable.constants.MySqlTypeConstant;
+import com.hr.common.annotation.Excel;
 import com.hr.common.annotation.Sensitive;
 import com.hr.common.constant.UserConstants;
 import com.hr.common.core.domain.BaseEntity;
@@ -43,12 +44,13 @@ public class SysUser extends BaseEntity {
     private Long deptId;
 
     /**
-     * 用户账号
+     * 登录账号
      */
     @Column
     @Xss(message = "用户账号不能包含脚本字符")
     @NotBlank(message = "用户账号不能为空")
     @Size(min = 0, max = 30, message = "用户账号长度不能超过30个字符")
+    @Excel(name = "登录账号")
     private String userName;
 
     /**
@@ -58,6 +60,7 @@ public class SysUser extends BaseEntity {
     @Like
     @Xss(message = "用户昵称不能包含脚本字符")
     @Size(min = 0, max = 30, message = "用户昵称长度不能超过30个字符")
+    @Excel(name = "用户昵称")
     private String nickName;
 
     /**
@@ -73,12 +76,14 @@ public class SysUser extends BaseEntity {
     @Sensitive(strategy = SensitiveStrategy.EMAIL)
     @Email(message = "邮箱格式不正确")
     @Size(min = 0, max = 50, message = "邮箱长度不能超过50个字符")
+    @Excel(name = "用户邮箱")
     private String email;
 
     /**
      * 手机号码
      */
     @Column
+    @Excel(name = "手机号码")
     @Sensitive(strategy = SensitiveStrategy.PHONE)
     private String phonenumber;
 
@@ -86,6 +91,7 @@ public class SysUser extends BaseEntity {
      * 用户性别
      */
     @Column
+    @Excel(name = "sex")
     private String sex;
 
     /**
@@ -128,12 +134,14 @@ public class SysUser extends BaseEntity {
      * 入职时间
      */
     @Column
+    @Excel(name = "入职时间", dateFormat = "yyyy-MM-dd")
     private Date entry;
 
     /**
      * 合同到期
      */
     @Column
+    @Excel(name = "合同到期", dateFormat = "yyyy-MM-dd")
     private Date due;
 
     /**
