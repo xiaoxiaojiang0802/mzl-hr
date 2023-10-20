@@ -57,6 +57,7 @@
     <el-table v-loading="loading" :data="attendanceList" @selection-change="handleSelectionChange">
       <el-table-column label="员工姓名" align="center" prop="employeeName"/>
       <el-table-column label="工号" align="center" prop="employeeNumber"/>
+      <el-table-column label="打卡时间" align="center" prop="date"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"

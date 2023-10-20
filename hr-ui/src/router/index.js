@@ -87,6 +87,20 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' }
       }
     ]
+  },
+  {
+    path: '/performance',
+    component: Layout,
+    hidden: true,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'addPerformance',
+        component: () => import('@/views/hr/performance/add'),
+        name: 'addPerformance',
+        meta: { title: '绩效申报', icon: 'user' }
+      }
+    ]
   }
 ]
 

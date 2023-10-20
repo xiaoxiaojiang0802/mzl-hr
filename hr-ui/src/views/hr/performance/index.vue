@@ -27,18 +27,13 @@ export default {
       params: {},
       loading: false,
       dataList: [],
-      option:{
-        index: true,
+      option: {
+        index: false,
         align: 'center',
         headerAlign: 'center',
-        border: true,
+        border: false,
         stripe: true,
-        column:  [
-          {
-            label: "",
-            prop: "id",
-            search: false,
-          },
+        column: [
           {
             label: "员工姓名",
             prop: "employeeName",
@@ -80,14 +75,22 @@ export default {
             }]
           },
           {
+            label: "工作阐述",
+            prop: "expound",
+            type: "textarea",
+            hide:true,
+          },
+          {
             label: "绩效评语",
             prop: "comment",
-            search: true,
+            type: "textarea",
+            hide:true,
           },
           {
             label: "绩效状态",
             prop: "status",
             search: true,
+            display: false,
           },
           {
             label: "绩效备注",

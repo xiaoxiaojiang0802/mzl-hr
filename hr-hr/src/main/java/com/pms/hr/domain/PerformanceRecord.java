@@ -29,16 +29,10 @@ public class PerformanceRecord extends BaseEntity {
     private Long id;
 
     /**
-     * 员工姓名
+     * 员工ID
      */
-    @Column(comment = "员工姓名")
-    private String employeeName;
-
-    /**
-     * 所属部门
-     */
-    @Column(comment = "所属部门")
-    private String department;
+    @Column(comment = "员工ID")
+    private String employeeId;
 
     /**
      * 绩效周期
@@ -52,6 +46,12 @@ public class PerformanceRecord extends BaseEntity {
      */
     @Column(comment = "绩效评分")
     private Long score;
+
+    /**
+     * 工作阐述
+     */
+    @Column(comment = "工作阐述")
+    private String expound;
 
     /**
      * 绩效评语

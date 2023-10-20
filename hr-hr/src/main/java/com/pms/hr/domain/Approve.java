@@ -18,6 +18,9 @@ public class Approve extends BaseEntity {
     @Column(comment = "标题")
     private String title;
 
+    /**
+     * approve_type
+     */
     @Column(comment = "审批类型")
     private String type;
 

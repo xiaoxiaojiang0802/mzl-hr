@@ -5,22 +5,27 @@
                @row-save="rowSave" @row-del="rowDel"
                @refresh-change="refreshChange" @search-reset="searchChange" @search-change="searchChange"
                v-model="form" :data="dataList">
+      <template slot-scope="scope" slot="menuLeft">
+        <el-button icon="el-icon-plus" size="medium" @click="$refs.crud.rowAdd()">请假</el-button>
+        <el-button icon="el-icon-plus" size="medium" @click="$refs.crud.rowAdd()">绩效</el-button>
+        <el-button icon="el-icon-plus" size="medium" @click="$refs.crud.rowAdd()">加班</el-button>
+        <el-button icon="el-icon-plus" size="medium" @click="$refs.crud.rowAdd()">外出</el-button>
+      </template>
     </avue-crud>
   </div>
 </template>
 
 <script>
 import {
-  pageLeave,
-  getLeave,
-  delLeave,
-  addLeave,
-  updateLeave
-} from "@/api/hr/leave";
-import {listUser} from "@/api/system/user";
+  pageApprove,
+  getApprove,
+  delApprove,
+  addApprove,
+  updateApprove
+} from "@/api/hr/approve";
 
 export default {
-  name: "Leave",
+  name: "Approve",
   data() {
     return {
       page: {},
@@ -32,82 +37,43 @@ export default {
         align: 'center',
         headerAlign: 'center',
         stripe: true,
+        addBtn: false,
         column: [
           {
-            label: "所属部门",
-            prop: "department",
-            search: false,
-            display: false,
-            rules: [{
-              required: true,
-              message: "请输入名称所属部门",
-              trigger: "blur"
-            }]
-          },
-          {
-            label: "员工姓名",
-            prop: "employeeId",
+            label: "标题",
+            prop: "title",
+            type: "input",
             search: true,
-            type: 'select',
-            props: {
-              label: 'nickName',
-              value: 'userId'
-            },
-            dicData: [],
-            rules: [{
-              required: true,
-              message: "请输入名称员工姓名",
-              trigger: "blur"
-            }]
           },
           {
-            label: "请假开始日期",
-            prop: "startDate",
-            search: false,
-            rules: [{
-              required: true,
-              message: "请输入名称请假开始日期",
-              trigger: "blur"
-            }]
-          },
-          {
-            label: "请假结束日期",
-            prop: "endDate",
-            search: false,
-            rules: [{
-              required: true,
-              message: "请输入名称请假结束日期",
-              trigger: "blur"
-            }]
-          },
-          {
-            label: "请假类型",
-            prop: "leaveType",
+            label: "审批类型",
+            prop: "type",
+            type: "select",
             search: true,
-            rules: [{
-              required: true,
-              message: "请输入名称请假类型",
-              trigger: "blur"
-            }]
           },
           {
-            label: "请假理由",
-            prop: "reason",
-            search: true,
-            rules: [{
-              required: true,
-              message: "请输入名称请假理由",
-              trigger: "blur"
-            }]
+            label: "申请人",
+            prop: "applicant",
+            type: "input",
+            search: false,
           },
           {
-            label: "请假状态",
+            label: "更新时间",
+            prop: "updateTime",
+            type: "datetime",
+            search: false,
+            display: true
+          },
+          {
+            label: "状态",
             prop: "status",
+            type: "radio",
             search: true,
           },
           {
-            label: "请假备注",
-            prop: "remark",
+            label: "当前审批人",
+            prop: "approvedUser",
+            type: "input",
             search: false,
           },
         ]
@@ -115,25 +81,14 @@ export default {
     }
   },
   created() {
-    this.listUser();
     this.getList();
   },
   methods: {
-    listUser() {
-      listUser({}).then(response => {
-          this.option.column.forEach(item => {
-            if (item.prop === 'employeeId') {
-              item.dicData.push(...response.rows)
-            }
-          })
-        }
-      );
-    },
     getList() {
       this.loading = true;
       this.params.current = this.page.current;
       this.params.size = this.page.size;
-      pageLeave(this.params).then(res => {
+      pageApprove(this.params).then(res => {
         const data = res.data;
         this.loading = false;
         this.page.total = data.total;
@@ -142,7 +97,7 @@ export default {
       })
     },
     rowSave(row, done, loading) {
-      addLeave(row).then(() => {
+      addApprove(row).then(() => {
         this.$message.success('新增成功')
         done();
         this.getList();
@@ -151,7 +106,7 @@ export default {
       })
     },
     rowUpdate(row, index, done, loading) {
-      updateLeave(row).then(() => {
+      updateApprove(row).then(() => {
         this.$message.success('修改成功')
         done()
         this.getList();
@@ -165,7 +120,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        return delLeave(row.id)
+        return delApprove(row.id)
       }).then(() => {
         this.$message.success('删除成功')
         this.getList();
