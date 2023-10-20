@@ -4,19 +4,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hr</groupId>
-    <artifactId>pms</artifactId>
+    <groupId>com.pms</groupId>
+    <artifactId>hr</artifactId>
     <version>1.0.0</version>
 
     <name>pms</name>
     <description>人事管理系统</description>
 
+    <modules>
+        <module>hr-admin</module>
+        <module>hr-framework</module>
+        <module>hr-system</module>
+        <module>hr-common</module>
+        <module>hr-hr</module>
+    </modules>
+    <packaging>pom</packaging>
     <properties>
         <mzl-pms.version>1.0.0</mzl-pms.version>
         <spring-boot.version>2.7.3</spring-boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
         <druid.version>1.2.12</druid.version>
         <springdoc.version>1.6.11</springdoc.version>
@@ -233,38 +243,38 @@
             </dependency>
             <!-- 定时任务 -->
             <dependency>
-                <groupId>com.hr</groupId>
-                <artifactId>pms-job</artifactId>
+                <groupId>com.pms</groupId>
+                <artifactId>hr-job</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.hr</groupId>
-                <artifactId>pms-generator</artifactId>
+                <groupId>com.pms</groupId>
+                <artifactId>hr-generator</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.hr</groupId>
-                <artifactId>pms-framework</artifactId>
+                <groupId>com.pms</groupId>
+                <artifactId>hr-framework</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.hr</groupId>
-                <artifactId>pms-system</artifactId>
+                <groupId>com.pms</groupId>
+                <artifactId>hr-system</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 人事模块-->
             <dependency>
-                <groupId>com.hr</groupId>
-                <artifactId>pms-hr</artifactId>
+                <groupId>com.pms</groupId>
+                <artifactId>hr-hr</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.hr</groupId>
-                <artifactId>pms-common</artifactId>
+                <groupId>com.pms</groupId>
+                <artifactId>hr-common</artifactId>
                 <version>${mzl-pms.version}</version>
             </dependency>
             <dependency>
@@ -275,14 +285,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <modules>
-        <module>pms-admin</module>
-        <module>pms-framework</module>
-        <module>pms-system</module>
-        <module>pms-common</module>
-        <module>pms-hr</module>
-    </modules>
-    <packaging>pom</packaging>
 
     <build>
         <plugins>
