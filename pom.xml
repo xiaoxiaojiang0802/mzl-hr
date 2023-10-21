@@ -4,19 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.pms</groupId>
-    <artifactId>hr</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>workers</artifactId>
     <version>1.0.0</version>
 
-    <name>hr</name>
+    <name>workers</name>
     <description>人事管理系统</description>
 
     <modules>
-        <module>hr-admin</module>
-        <module>hr-framework</module>
-        <module>hr-system</module>
-        <module>hr-common</module>
-        <module>hr-hr</module>
+        <module>admin</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
@@ -43,7 +39,6 @@
         <lombok.version>1.18.24</lombok.version>
         <fastjson.version>1.2.83</fastjson.version>
         <swagger-annotations.version>1.5.22</swagger-annotations.version>
-        <knife4j.version>4.0.0</knife4j.version>
         <!-- 统一 guava 版本 解决隐式漏洞问题 -->
         <guava.version>31.1-jre</guava.version>
         <!-- OSS 配置 -->
@@ -63,17 +58,6 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
-                <version>${knife4j.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>io.swagger</groupId>
-                        <artifactId>swagger-annotations</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
@@ -240,42 +224,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
-            </dependency>
-            <!-- 定时任务 -->
-            <dependency>
-                <groupId>com.pms</groupId>
-                <artifactId>hr-job</artifactId>
-                <version>${mzl-pms.version}</version>
-            </dependency>
-            <!-- 代码生成-->
-            <dependency>
-                <groupId>com.pms</groupId>
-                <artifactId>hr-generator</artifactId>
-                <version>${mzl-pms.version}</version>
-            </dependency>
-            <!-- 核心模块-->
-            <dependency>
-                <groupId>com.pms</groupId>
-                <artifactId>hr-framework</artifactId>
-                <version>${mzl-pms.version}</version>
-            </dependency>
-            <!-- 系统模块-->
-            <dependency>
-                <groupId>com.pms</groupId>
-                <artifactId>hr-system</artifactId>
-                <version>${mzl-pms.version}</version>
-            </dependency>
-            <!-- 人事模块-->
-            <dependency>
-                <groupId>com.pms</groupId>
-                <artifactId>hr-hr</artifactId>
-                <version>${mzl-pms.version}</version>
-            </dependency>
-            <!-- 通用工具-->
-            <dependency>
-                <groupId>com.pms</groupId>
-                <artifactId>hr-common</artifactId>
-                <version>${mzl-pms.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>

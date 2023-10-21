@@ -1,2 +1,0 @@
-Application Version: ${mzl-pms.version}
-Spring Boot Version: ${spring-boot.version}
