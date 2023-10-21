@@ -8,7 +8,7 @@
     <artifactId>hr</artifactId>
     <version>1.0.0</version>
 
-    <name>pms</name>
+    <name>hr</name>
     <description>人事管理系统</description>
 
     <modules>
