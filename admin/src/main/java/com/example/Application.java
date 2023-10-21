@@ -21,7 +21,7 @@ public class Application {
         SpringApplication application = new SpringApplication(Application.class);
         application.setApplicationStartup(new BufferingApplicationStartup(2048));
         application.run(args);
-        System.out.println("人事管理启动成功     ლ(´ڡ`ლ)ﾞ");
+        System.out.println("职工管理启动成功     ლ(´ڡ`ლ)ﾞ");
     }
 
 }
