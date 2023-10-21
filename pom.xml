@@ -9,7 +9,7 @@
     <version>1.0.0</version>
 
     <name>workers</name>
-    <description>人事管理系统</description>
+    <description>职工管理系统</description>
 
     <modules>
         <module>admin</module>
