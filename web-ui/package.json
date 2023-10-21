@@ -1,8 +1,8 @@
 {
-  "name": "hr-ui",
+  "name": "web-ui",
   "version": "1.0.0",
-  "description": "人事管理系统",
-  "author": "xiaojiang",
+  "description": "",
+  "author": "",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
