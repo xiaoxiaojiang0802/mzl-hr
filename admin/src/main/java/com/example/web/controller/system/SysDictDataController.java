@@ -2,6 +2,7 @@ package com.example.web.controller.system;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.hutool.core.util.ObjectUtil;
+import com.example.common.annotation.Anonymous;
 import com.example.common.annotation.Log;
 import com.example.common.core.controller.BaseController;
 import com.example.common.core.domain.PageQuery;
@@ -60,7 +61,7 @@ public class SysDictDataController extends BaseController {
      *
      * @param dictCode 字典code
      */
-    @SaCheckPermission("system:dict:query")
+    @Anonymous
     @GetMapping(value = "/{dictCode}")
     public R<SysDictData> getInfo(@PathVariable Long dictCode) {
         return R.ok(dictDataService.selectDictDataById(dictCode));
@@ -71,6 +72,7 @@ public class SysDictDataController extends BaseController {
      *
      * @param dictType 字典类型
      */
+    @Anonymous
     @GetMapping(value = "/type/{dictType}")
     public R<List<SysDictData>> dictType(@PathVariable String dictType) {
         List<SysDictData> data = dictTypeService.selectDictDataByType(dictType);

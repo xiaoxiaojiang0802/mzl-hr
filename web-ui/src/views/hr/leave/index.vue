@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <avue-crud ref="crud" :option="option" v-model:page="page" :table-loading="loading"
-               @on-load="getList" @row-update="rowUpdate"
+               @on-load="getList" @row-update="rowUpdate" @date-change="dateChange"
                @row-save="rowSave" @row-del="rowDel"
                @refresh-change="refreshChange" @search-reset="searchChange" @search-change="searchChange"
                v-model="form" :data="dataList">
@@ -31,7 +31,6 @@ export default {
       option: {
         align: 'center',
         headerAlign: 'center',
-        stripe: true,
         column: [
           {
             label: "所属部门",
@@ -61,9 +60,11 @@ export default {
             }]
           },
           {
-            label: "请假开始日期",
+            label: "开始日期",
             prop: "startDate",
-            search: false,
+            type: 'datetime',
+            searchRange: true,
+            search: true,
             rules: [{
               required: true,
               message: "请输入名称请假开始日期",
@@ -71,8 +72,9 @@ export default {
             }]
           },
           {
-            label: "请假结束日期",
+            label: "结束日期",
             prop: "endDate",
+            type: 'datetime',
             search: false,
             rules: [{
               required: true,
@@ -83,6 +85,12 @@ export default {
           {
             label: "请假类型",
             prop: "leaveType",
+            type: "select",
+            dicUrl: process.env.VUE_APP_BASE_API + '/system/dict/data/type/leave_type',
+            props: {
+              label: 'dictLabel',
+              value: 'dictValue'
+            },
             search: true,
             rules: [{
               required: true,
@@ -93,7 +101,6 @@ export default {
           {
             label: "请假理由",
             prop: "reason",
-            search: true,
             rules: [{
               required: true,
               message: "请输入名称请假理由",
@@ -103,12 +110,10 @@ export default {
           {
             label: "请假状态",
             prop: "status",
-            search: true,
           },
           {
             label: "请假备注",
             prop: "remark",
-            search: false,
           },
         ]
       },
@@ -119,11 +124,13 @@ export default {
     this.getList();
   },
   methods: {
+    dateChange(date) {
+    },
     listUser() {
       listUser({}).then(response => {
           this.option.column.forEach(item => {
             if (item.prop === 'employeeId') {
-              item.dicData.push(...response.rows)
+              item.dicData.push(...response.rows);
             }
           })
         }
