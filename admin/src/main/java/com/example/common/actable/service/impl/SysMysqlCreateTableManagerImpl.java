@@ -370,7 +370,6 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
                 if ("PRI".equals(sysColumn.getColumn_key()) && !createTableParam.isFieldIsKey()) {
                     dropKeyFieldList.add(createTableParam);
                 }
-
             }
         }
         return dropKeyFieldList;
@@ -387,7 +386,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
      */
     private List<Object> getModifyFieldList(List<SysMysqlColumns> tableColumnList, List<Object> allFieldList) {
         Map<String, CreateTableParam> fieldMap = getAllFieldMap(allFieldList);
-        List<Object> modifyFieldList = new ArrayList<Object>();
+        List<Object> modifyFieldList = new ArrayList<>();
         for (SysMysqlColumns sysColumn : tableColumnList) {
             // 数据库中有该字段时，验证是否有更新
             CreateTableParam createTableParam = fieldMap.get(sysColumn.getColumn_name().toLowerCase());
@@ -406,7 +405,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
                     modifyTableParam.setFieldIsKey(false);
                 }
                 // 2.验证类型
-                if (!sysColumn.getData_type().toLowerCase().equals(createTableParam.getFieldType().toLowerCase())) {
+                if (!sysColumn.getData_type().equalsIgnoreCase(createTableParam.getFieldType())) {
                     modifyFieldList.add(modifyTableParam);
                     continue;
                 }
@@ -420,7 +419,6 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
                     typeAndLength = typeAndLength + "(" + createTableParam.getFieldLength() + ","
                         + createTableParam.getFieldDecimalLength() + ")";
                 }
-
                 // 判断类型+长度是否相同
                 if (!sysColumn.getColumn_type().toLowerCase().equals(typeAndLength)) {
                     modifyFieldList.add(modifyTableParam);

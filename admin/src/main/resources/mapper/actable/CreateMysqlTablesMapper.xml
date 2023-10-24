@@ -235,7 +235,7 @@
         <foreach collection="tableMap" index="key" item="fields" separator=";">
             alter table `${key}` modify
             <include refid="commonSql"/>
---             ,drop primary key
+            --             ,drop primary key
         </foreach>
     </select>
     <!-- 验证表是否存在 -->
