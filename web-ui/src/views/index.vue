@@ -59,6 +59,7 @@
         </el-row>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
+        <span>系统公告</span>
         <el-card v-for="notice in noticeList" class="box-card">
           <div slot="header" class="clearfix">
             <span>{{ notice.noticeTitle }}</span>

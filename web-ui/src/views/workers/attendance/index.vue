@@ -110,7 +110,7 @@ import {
   delAttendance,
   addAttendance,
   updateAttendance
-} from "@/api/hr/attendance";
+} from "@/api/workers/attendance";
 import {getToken} from "@/utils/auth";
 
 export default {

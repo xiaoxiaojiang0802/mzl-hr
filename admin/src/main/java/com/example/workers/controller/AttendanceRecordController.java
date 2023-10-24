@@ -23,7 +23,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/hr/attendance")
+@RequestMapping("/workers/attendance")
 public class AttendanceRecordController extends BaseController {
 
     private final AttendanceRecordService attendanceRecordService;

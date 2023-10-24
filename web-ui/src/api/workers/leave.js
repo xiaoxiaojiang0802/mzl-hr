@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询请假记录列表
 export function pageLeave(query) {
   return request({
-    url: '/hr/leave/page',
+    url: '/workers/leave/page',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function pageLeave(query) {
 // 查询请假记录详细
 export function getLeave(id) {
   return request({
-    url: '/hr/leave/getById/' + id,
+    url: '/workers/leave/getById/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getLeave(id) {
 // 新增请假记录
 export function addLeave(data) {
   return request({
-    url: '/hr/leave',
+    url: '/workers/leave',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addLeave(data) {
 // 修改请假记录
 export function updateLeave(data) {
   return request({
-    url: '/hr/leave',
+    url: '/workers/leave',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateLeave(data) {
 // 删除请假记录
 export function delLeave(id) {
   return request({
-    url: '/hr/leave/removeByIds/' + id,
+    url: '/workers/leave/removeByIds/' + id,
     method: 'delete'
   })
 }

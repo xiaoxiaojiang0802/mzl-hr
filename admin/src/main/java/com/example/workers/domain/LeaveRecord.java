@@ -35,6 +35,12 @@ public class LeaveRecord extends BaseEntity {
     private String employeeName;
 
     /**
+     * 员工id
+     */
+    @Column(comment = "员工id")
+    private String employeeId;
+
+    /**
      * 所属部门
      */
     @Column(comment = "所属部门")

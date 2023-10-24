@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/hr/approve" )
+@RequestMapping("/workers/approve" )
 public class ApproveController extends BaseController {
 
     private final  ApproveService approveService;

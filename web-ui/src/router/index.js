@@ -96,7 +96,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'addPerformance',
-        component: () => import('@/views/hr/performance/add'),
+        component: () => import('@/views/workers/performance/add'),
         name: 'addPerformance',
         meta: { title: '绩效申报', icon: 'user' }
       }

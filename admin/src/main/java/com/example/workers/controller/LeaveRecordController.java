@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/hr/leave")
+@RequestMapping("/workers/leave")
 public class LeaveRecordController extends BaseController {
 
     private final LeaveRecordService leaveRecordService;

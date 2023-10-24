@@ -75,6 +75,13 @@ public class SysUser extends BaseEntity {
     private String userType;
 
     /**
+     * 工号
+     */
+    @Excel(name = "工号")
+    @Column(comment = "工号")
+    private String employeeNumber;
+
+    /**
      * 用户邮箱
      */
     @Column

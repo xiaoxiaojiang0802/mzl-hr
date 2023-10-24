@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/hr/performance" )
+@RequestMapping("/workers/performance" )
 public class PerformanceRecordController extends BaseController {
 
     private final PerformanceRecordService performanceRecordService;

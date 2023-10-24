@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <avue-crud ref="crud" :option="option" v-model:page="page" :table-loading="loading"
-               @on-load="getList" @row-update="rowUpdate" @date-change="dateChange"
+               @on-load="getList" @row-update="rowUpdate"
                @row-save="rowSave" @row-del="rowDel"
                @refresh-change="refreshChange" @search-reset="searchChange" @search-change="searchChange"
                v-model="form" :data="dataList">
@@ -11,16 +11,15 @@
 
 <script>
 import {
-  pageLeave,
-  getLeave,
-  delLeave,
-  addLeave,
-  updateLeave
-} from "@/api/hr/leave";
-import {listUser} from "@/api/system/user";
+  pagePerformance,
+  getPerformance,
+  delPerformance,
+  addPerformance,
+  updatePerformance
+} from "@/api/workers/performance";
 
 export default {
-  name: "Leave",
+  name: "Performance",
   data() {
     return {
       page: {},
@@ -29,30 +28,16 @@ export default {
       loading: false,
       dataList: [],
       option: {
+        index: false,
         align: 'center',
         headerAlign: 'center',
+        border: false,
+        stripe: true,
         column: [
           {
-            label: "所属部门",
-            prop: "department",
-            search: false,
-            display: false,
-            rules: [{
-              required: true,
-              message: "请输入名称所属部门",
-              trigger: "blur"
-            }]
-          },
-          {
             label: "员工姓名",
-            prop: "employeeId",
+            prop: "employeeName",
             search: true,
-            type: 'select',
-            props: {
-              label: 'nickName',
-              value: 'userId'
-            },
-            dicData: [],
             rules: [{
               required: true,
               message: "请输入名称员工姓名",
@@ -60,87 +45,71 @@ export default {
             }]
           },
           {
-            label: "开始日期",
-            prop: "startDate",
-            type: 'datetime',
-            searchRange: true,
+            label: "所属部门",
+            prop: "department",
             search: true,
             rules: [{
               required: true,
-              message: "请输入名称请假开始日期",
+              message: "请输入名称所属部门",
               trigger: "blur"
             }]
           },
           {
-            label: "结束日期",
-            prop: "endDate",
-            type: 'datetime',
-            search: false,
-            rules: [{
-              required: true,
-              message: "请输入名称请假结束日期",
-              trigger: "blur"
-            }]
-          },
-          {
-            label: "请假类型",
-            prop: "leaveType",
-            type: "select",
-            dicUrl: process.env.VUE_APP_BASE_API + '/system/dict/data/type/leave_type',
-            props: {
-              label: 'dictLabel',
-              value: 'dictValue'
-            },
+            label: "绩效周期",
+            prop: "period",
             search: true,
             rules: [{
               required: true,
-              message: "请输入名称请假类型",
+              message: "请输入名称绩效周期",
               trigger: "blur"
             }]
           },
           {
-            label: "请假理由",
-            prop: "reason",
+            label: "绩效评分",
+            prop: "score",
+            search: true,
             rules: [{
               required: true,
-              message: "请输入名称请假理由",
+              message: "请输入名称绩效评分",
               trigger: "blur"
             }]
           },
           {
-            label: "请假状态",
+            label: "工作阐述",
+            prop: "expound",
+            type: "textarea",
+            hide:true,
+          },
+          {
+            label: "绩效评语",
+            prop: "comment",
+            type: "textarea",
+            hide:true,
+          },
+          {
+            label: "绩效状态",
             prop: "status",
+            search: true,
+            display: false,
           },
           {
-            label: "请假备注",
+            label: "绩效备注",
             prop: "remark",
+            search: false,
           },
         ]
       },
     }
   },
   created() {
-    this.listUser();
     this.getList();
   },
   methods: {
-    dateChange(date) {
-    },
-    listUser() {
-      listUser({}).then(response => {
-          this.option.column.forEach(item => {
-            if (item.prop === 'employeeId') {
-              item.dicData.push(...response.rows);
-            }
-          })
-        }
-      );
-    },
     getList() {
       this.loading = true;
       this.params.current = this.page.current;
       this.params.size = this.page.size;
-      pageLeave(this.params).then(res => {
+      pagePerformance(this.params).then(res => {
         const data = res.data;
         this.loading = false;
         this.page.total = data.total;
@@ -149,7 +118,7 @@ export default {
       })
     },
     rowSave(row, done, loading) {
-      addLeave(row).then(() => {
+      addPerformance(row).then(() => {
         this.$message.success('新增成功')
         done();
         this.getList();
@@ -158,7 +127,7 @@ export default {
       })
     },
     rowUpdate(row, index, done, loading) {
-      updateLeave(row).then(() => {
+      updatePerformance(row).then(() => {
         this.$message.success('修改成功')
         done()
         this.getList();
@@ -172,7 +141,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        return delLeave(row.id)
+        return delPerformance(row.id)
       }).then(() => {
         this.$message.success('删除成功')
         this.getList();

@@ -22,7 +22,7 @@ import {
   delApprove,
   addApprove,
   updateApprove
-} from "@/api/hr/approve";
+} from "@/api/workers/approve";
 
 export default {
   name: "Approve",
