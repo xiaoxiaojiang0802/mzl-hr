@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <avue-crud ref="crud" :option="option" v-model:page="page" :table-loading="loading"
-               @on-load="getList" @row-update="rowUpdate" @date-change="dateChange"
+               @on-load="getList" @row-update="rowUpdate"
                @row-save="rowSave" @row-del="rowDel"
                @refresh-change="refreshChange" @search-reset="searchChange" @search-change="searchChange"
                v-model="form" :data="dataList">
@@ -11,16 +11,15 @@
 
 <script>
 import {
-  pageLeave,
-  getLeave,
-  delLeave,
-  addLeave,
-  updateLeave
-} from "@/api/workers/leave";
-import {listUser} from "@/api/system/user";
+  pageReward,
+  getReward,
+  delReward,
+  addReward,
+  updateReward
+} from "@/api/workers/reward";
 
 export default {
-  name: "Leave",
+  name: "Reward",
   data() {
     return {
       page: {},
@@ -31,17 +30,19 @@ export default {
       option: {
         align: 'center',
         headerAlign: 'center',
+        stripe: true,
         column: [
           {
+            label: "",
+            prop: "id",
+            type: "input",
+            search: false,
+          },
+          {
             label: "员工姓名",
-            prop: "employeeId",
+            prop: "employeeName",
+            type: "input",
             search: true,
-            type: 'select',
-            props: {
-              label: 'nickName',
-              value: 'userId'
-            },
-            dicData: [],
             rules: [{
               required: true,
               message: "请输入名称员工姓名",
@@ -49,90 +50,80 @@ export default {
             }]
           },
           {
-            label: "开始日期",
-            prop: "startDate",
-            type: 'datetime',
-            searchRange: true,
+            label: "所属部门",
+            prop: "department",
+            type: "input",
             search: true,
             rules: [{
               required: true,
-              message: "请输入名称请假开始日期",
+              message: "请输入名称所属部门",
               trigger: "blur"
             }]
           },
           {
-            label: "结束日期",
-            prop: "endDate",
-            type: 'datetime',
-            search: false,
+            label: "奖惩日期",
+            prop: "date",
+            type: "datetime",
+            search: true,
             rules: [{
               required: true,
-              message: "请输入名称请假结束日期",
+              message: "请输入名称奖惩日期",
               trigger: "blur"
             }]
           },
           {
-            label: "请假类型",
-            prop: "leaveType",
+            label: "奖惩类型",
+            prop: "type",
             type: "select",
-            dicUrl: process.env.VUE_APP_BASE_API + '/system/dict/data/type/leave_type',
-            props: {
-              label: 'dictLabel',
-              value: 'dictValue'
-            },
             search: true,
             rules: [{
               required: true,
-              message: "请输入名称请假类型",
+              message: "请输入名称奖惩类型",
               trigger: "blur"
             }]
           },
           {
-            label: "请假原因",
+            label: "奖惩原因",
             prop: "reason",
-            type: "textarea",
+            type: "input",
+            search: false,
+          },
+          {
+            label: "奖惩金额",
+            prop: "amount",
+            type: "input",
+            search: false,
+          },
+          {
+            label: "奖惩状态",
+            prop: "status",
+            type: "radio",
+            search: true,
             rules: [{
               required: true,
-              message: "请输入名称请假原因",
+              message: "请输入名称奖惩状态",
               trigger: "blur"
             }]
           },
           {
-            label: "请假状态",
-            prop: "status",
-            display: false
-          },
-          {
-            label: "请假备注",
+            label: "",
             prop: "remark",
-            type: "textarea",
+            type: "input",
+            search: false,
           },
         ]
       },
     }
   },
   created() {
-    this.listUser();
     this.getList();
   },
   methods: {
-    dateChange(date) {
-    },
-    listUser() {
-      listUser({}).then(response => {
-          this.option.column.forEach(item => {
-            if (item.prop === 'employeeId') {
-              item.dicData.push(...response.rows);
-            }
-          })
-        }
-      );
-    },
     getList() {
       this.loading = true;
       this.params.current = this.page.current;
       this.params.size = this.page.size;
-      pageLeave(this.params).then(res => {
+      pageReward(this.params).then(res => {
         const data = res.data;
         this.loading = false;
         this.page.total = data.total;
@@ -141,7 +132,7 @@ export default {
       })
     },
     rowSave(row, done, loading) {
-      addLeave(row).then(() => {
+      addReward(row).then(() => {
         this.$message.success('新增成功')
         done();
         this.getList();
@@ -150,7 +141,7 @@ export default {
       })
     },
     rowUpdate(row, index, done, loading) {
-      updateLeave(row).then(() => {
+      updateReward(row).then(() => {
         this.$message.success('修改成功')
         done()
         this.getList();
@@ -164,7 +155,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        return delLeave(row.id)
+        return delReward(row.id)
       }).then(() => {
         this.$message.success('删除成功')
         this.getList();

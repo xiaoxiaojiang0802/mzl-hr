@@ -864,4 +864,4 @@ CREATE TABLE leave_record
     status        VARCHAR(255) COMMENT '请假状态，如已申请、已批准、已驳回等',
     remark        VARCHAR(255) COMMENT '请假备注',
     PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='请假记录表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='请假记录表';

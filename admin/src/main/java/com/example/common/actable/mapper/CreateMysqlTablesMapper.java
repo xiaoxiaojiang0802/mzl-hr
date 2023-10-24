@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
 import com.example.common.actable.command.SysMysqlColumns;
 import com.example.common.actable.command.SysMysqlTable;
 import com.example.common.actable.command.TableConfig;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Set;
  * @author sunchenbin
  */
 @InterceptorIgnore(tenantLine = "true")
+@Mapper
 public interface CreateMysqlTablesMapper {
 
     /**

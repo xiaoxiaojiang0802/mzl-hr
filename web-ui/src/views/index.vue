@@ -13,7 +13,7 @@
                 <div class="card-panel-text">
                   在职员工
                 </div>
-                <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num"/>
+                <count-to :start-val="0" :end-val="indexVo.workerNumber" :duration="2600" class="card-panel-num"/>
               </div>
             </div>
           </el-col>
@@ -26,7 +26,7 @@
                 <div class="card-panel-text">
                   请假记录
                 </div>
-                <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num"/>
+                <count-to :start-val="0" :end-val="indexVo.leaveNumber" :duration="3000" class="card-panel-num"/>
               </div>
             </div>
           </el-col>
@@ -39,7 +39,7 @@
                 <div class="card-panel-text">
                   奖惩金额
                 </div>
-                <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num"/>
+                <count-to :start-val="0" :end-val="indexVo.leaveNumber" :duration="3200" class="card-panel-num"/>
               </div>
             </div>
           </el-col>
@@ -52,7 +52,7 @@
                 <div class="card-panel-text">
                   今日缺勤
                 </div>
-                <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num"/>
+                <count-to :start-val="0" :end-val="indexVo.leaveNumber" :duration="3600" class="card-panel-num"/>
               </div>
             </div>
           </el-col>
@@ -84,6 +84,7 @@
 <script>
 import CountTo from 'vue-count-to';
 import {listNotice} from "@/api/system/notice";
+import {selectIndex} from "@/api/workers";
 
 export default {
   name: 'Index',
@@ -92,6 +93,12 @@ export default {
   data() {
     return {
       noticeList: [],
+      indexVo: {
+        workerNumber: 0,
+        amount: 0,
+        leaveNumber: 0,
+        absenceNumber: 0,
+      },
       queryParams: {
         pageNum: 1,
         pageSize: 5,
@@ -99,9 +106,15 @@ export default {
     }
   },
   created() {
+    this.selectIndex();
     this.listNotice();
   },
   methods: {
+    selectIndex() {
+      selectIndex().then(res => {
+        this.indexVo = res.data;
+      })
+    },
     listNotice() {
       listNotice(this.queryParams).then(response => {
         this.noticeList = response.rows;

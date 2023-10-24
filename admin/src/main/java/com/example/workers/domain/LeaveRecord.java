@@ -41,12 +41,6 @@ public class LeaveRecord extends BaseEntity {
     private String employeeId;
 
     /**
-     * 所属部门
-     */
-    @Column(comment = "所属部门")
-    private String department;
-
-    /**
      * 请假开始日期
      */
     @JsonFormat(pattern = "yyyy-MM-dd")

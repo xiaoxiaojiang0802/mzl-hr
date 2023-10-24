@@ -5,7 +5,9 @@
 <mapper namespace="com.example.workers.mapper.IndexMapper">
 
     <select id="selectIndex" resultType="com.example.workers.vo.IndexVo">
-        select *
+        select count(distinct u.user_id)                       as worker_number,
+               count(distinct lr.employee_id)                  as leave_number,
+               sum(case when lr.employee_id then 1 else 0 end) as absence_number
         from sys_user u
                  left join leave_record lr on
             (u.user_id = lr.employee_id and
@@ -13,7 +15,8 @@
              date_format(lr.end_date, '%Y-%m-%d') &gt;= date_format(now(), '%Y%m%d'))
                  left join attendance_record ar on
             (ar.employee_number = u.employee_number and
-             date_format(ar.date, '%Y-%m-%d') = date_format(now(), '%Y%m%d') )
+             date_format(ar.date, '%Y-%m-%d') = date_format(now(), '%Y%m%d'))
         where u.del_flag = '0'
+        group by u.user_id
     </select>
 </mapper>

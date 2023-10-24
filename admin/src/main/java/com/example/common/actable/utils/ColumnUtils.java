@@ -125,6 +125,9 @@ public class ColumnUtils {
             name).toLowerCase();
     }
 
+    /**
+     * 是否是主键
+     */
     public static boolean isKey(Field field, Class<?> clasz) {
         Column column = getColumn(field, clasz);
         if (!hasColumnAnnotation(field, clasz)) {
@@ -136,10 +139,7 @@ public class ColumnUtils {
             return true;
         } else if (column != null && column.isKey()) {
             return true;
-        } else if (null != tableId) {
-            return true;
-        }
-        return false;
+        } else return null != tableId;
     }
 
     public static boolean isAutoIncrement(Field field, Class<?> clasz) {
@@ -150,10 +150,7 @@ public class ColumnUtils {
         IsAutoIncrement isAutoIncrement = field.getAnnotation(IsAutoIncrement.class);
         if (null != isAutoIncrement) {
             return true;
-        } else if (column != null && column.isAutoIncrement()) {
-            return true;
-        }
-        return false;
+        } else return column != null && column.isAutoIncrement();
     }
 
     public static Boolean isNull(Field field, Class<?> clasz) {
