@@ -11,8 +11,8 @@ import com.example.common.enums.BusinessType;
 import com.example.common.helper.LoginHelper;
 import com.example.common.utils.StringUtils;
 import com.example.common.utils.file.MimeTypeUtils;
-import com.example.system.domain.SysOss;
-import com.example.system.service.ISysOssService;
+import com.example.system.domain.SysFile;
+import com.example.system.service.ISysFileService;
 import com.example.system.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -36,7 +36,7 @@ import java.util.Map;
 public class SysProfileController extends BaseController {
 
     private final ISysUserService userService;
-    private final ISysOssService iSysOssService;
+    private final ISysFileService iSysFileService;
 
     /**
      * 个人信息
@@ -115,7 +115,7 @@ public class SysProfileController extends BaseController {
             if (!StringUtils.equalsAnyIgnoreCase(extension, MimeTypeUtils.IMAGE_EXTENSION)) {
                 return R.fail("文件格式不正确，请上传" + Arrays.toString(MimeTypeUtils.IMAGE_EXTENSION) + "格式");
             }
-            SysOss oss = iSysOssService.upload(avatarfile);
+            SysFile oss = iSysFileService.upload(avatarfile);
             String avatar = oss.getUrl();
             if (userService.updateUserAvatar(getUsername(), avatar)) {
                 ajax.put("imgUrl", avatar);

@@ -33,12 +33,6 @@ export default {
         stripe: true,
         column: [
           {
-            label: "",
-            prop: "id",
-            type: "input",
-            search: false,
-          },
-          {
             label: "员工姓名",
             prop: "employeeName",
             type: "input",
@@ -50,21 +44,9 @@ export default {
             }]
           },
           {
-            label: "所属部门",
-            prop: "department",
-            type: "input",
-            search: true,
-            rules: [{
-              required: true,
-              message: "请输入名称所属部门",
-              trigger: "blur"
-            }]
-          },
-          {
             label: "奖惩日期",
-            prop: "date",
+            prop: "recordDate",
             type: "datetime",
-            search: true,
             rules: [{
               required: true,
               message: "请输入名称奖惩日期",
@@ -83,12 +65,6 @@ export default {
             }]
           },
           {
-            label: "奖惩原因",
-            prop: "reason",
-            type: "input",
-            search: false,
-          },
-          {
             label: "奖惩金额",
             prop: "amount",
             type: "input",
@@ -99,6 +75,7 @@ export default {
             prop: "status",
             type: "radio",
             search: true,
+            display: false,
             rules: [{
               required: true,
               message: "请输入名称奖惩状态",
@@ -106,9 +83,15 @@ export default {
             }]
           },
           {
-            label: "",
+            label: "奖惩原因",
+            prop: "reason",
+            type: "textarea",
+            search: false,
+          },
+          {
+            label: "备注",
             prop: "remark",
-            type: "input",
+            type: "textarea",
             search: false,
           },
         ]

@@ -14,14 +14,14 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("sys_oss")
-public class SysOss extends BaseEntity {
+@TableName("sys_file")
+public class SysFile extends BaseEntity {
 
     /**
      * 对象存储主键
      */
-    @TableId(value = "oss_id")
-    private Long ossId;
+    @TableId(value = "file_id")
+    private Long fileId;
 
     /**
      * 文件名

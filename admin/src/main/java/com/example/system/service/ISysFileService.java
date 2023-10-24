@@ -2,7 +2,7 @@ package com.example.system.service;
 
 import com.example.common.core.domain.PageQuery;
 import com.example.common.core.page.TableDataInfo;
-import com.example.system.domain.SysOss;
+import com.example.system.domain.SysFile;
 import com.example.system.domain.bo.SysOssBo;
 import com.example.system.domain.vo.SysOssVo;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author ruoyi
  */
-public interface ISysOssService {
+public interface ISysFileService {
 
     TableDataInfo<SysOssVo> queryPageList(SysOssBo sysOss, PageQuery pageQuery);
 
@@ -23,7 +23,7 @@ public interface ISysOssService {
 
     SysOssVo getById(Long ossId);
 
-    SysOss upload(MultipartFile file);
+    SysFile upload(MultipartFile file);
 
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
 

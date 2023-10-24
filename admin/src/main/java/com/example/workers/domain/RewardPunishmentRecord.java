@@ -1,6 +1,8 @@
 package com.example.workers.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.example.common.actable.annotation.Column;
+import com.example.common.actable.annotation.Table;
 import com.example.common.core.domain.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -17,12 +19,15 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Table
 public class RewardPunishmentRecord extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
     /**
      *
      */
+    @TableId
     private Long id;
 
     /**
@@ -42,7 +47,7 @@ public class RewardPunishmentRecord extends BaseEntity {
      */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(comment = "奖惩日期")
-    private Date date;
+    private Date recordDate;
 
     /**
      * 奖惩类型

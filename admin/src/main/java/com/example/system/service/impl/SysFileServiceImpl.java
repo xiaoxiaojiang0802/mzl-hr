@@ -8,11 +8,11 @@ import com.example.common.constant.CacheNames;
 import com.example.common.core.domain.PageQuery;
 import com.example.common.core.page.TableDataInfo;
 import com.example.common.utils.StringUtils;
-import com.example.system.domain.SysOss;
+import com.example.system.domain.SysFile;
 import com.example.system.domain.bo.SysOssBo;
 import com.example.system.domain.vo.SysOssVo;
 import com.example.system.mapper.SysOssMapper;
-import com.example.system.service.ISysOssService;
+import com.example.system.service.ISysFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -30,13 +30,13 @@ import java.util.Map;
  */
 @RequiredArgsConstructor
 @Service
-public class SysOssServiceImpl implements ISysOssService {
+public class SysFileServiceImpl implements ISysFileService {
 
     private final SysOssMapper baseMapper;
 
     @Override
     public TableDataInfo<SysOssVo> queryPageList(SysOssBo bo, PageQuery pageQuery) {
-        LambdaQueryWrapper<SysOss> lqw = buildQueryWrapper(bo);
+        LambdaQueryWrapper<SysFile> lqw = buildQueryWrapper(bo);
         Page<SysOssVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw, SysOssVo.class);
         return TableDataInfo.build(result);
     }
@@ -53,17 +53,17 @@ public class SysOssServiceImpl implements ISysOssService {
         return list;
     }
 
-    private LambdaQueryWrapper<SysOss> buildQueryWrapper(SysOssBo bo) {
+    private LambdaQueryWrapper<SysFile> buildQueryWrapper(SysOssBo bo) {
         Map<String, Object> params = bo.getParams();
-        LambdaQueryWrapper<SysOss> lqw = Wrappers.lambdaQuery();
-        lqw.like(StringUtils.isNotBlank(bo.getFileName()), SysOss::getFileName, bo.getFileName());
-        lqw.like(StringUtils.isNotBlank(bo.getOriginalName()), SysOss::getOriginalName, bo.getOriginalName());
-        lqw.eq(StringUtils.isNotBlank(bo.getFileSuffix()), SysOss::getFileSuffix, bo.getFileSuffix());
-        lqw.eq(StringUtils.isNotBlank(bo.getUrl()), SysOss::getUrl, bo.getUrl());
+        LambdaQueryWrapper<SysFile> lqw = Wrappers.lambdaQuery();
+        lqw.like(StringUtils.isNotBlank(bo.getFileName()), SysFile::getFileName, bo.getFileName());
+        lqw.like(StringUtils.isNotBlank(bo.getOriginalName()), SysFile::getOriginalName, bo.getOriginalName());
+        lqw.eq(StringUtils.isNotBlank(bo.getFileSuffix()), SysFile::getFileSuffix, bo.getFileSuffix());
+        lqw.eq(StringUtils.isNotBlank(bo.getUrl()), SysFile::getUrl, bo.getUrl());
         lqw.between(params.get("beginCreateTime" ) != null && params.get("endCreateTime" ) != null,
-            SysOss::getCreateTime, params.get("beginCreateTime" ), params.get("endCreateTime" ));
-        lqw.eq(StringUtils.isNotBlank(bo.getCreateBy()), SysOss::getCreateBy, bo.getCreateBy());
-        lqw.eq(StringUtils.isNotBlank(bo.getService()), SysOss::getService, bo.getService());
+            SysFile::getCreateTime, params.get("beginCreateTime" ), params.get("endCreateTime" ));
+        lqw.eq(StringUtils.isNotBlank(bo.getCreateBy()), SysFile::getCreateBy, bo.getCreateBy());
+        lqw.eq(StringUtils.isNotBlank(bo.getService()), SysFile::getService, bo.getService());
         return lqw;
     }
 
@@ -74,7 +74,7 @@ public class SysOssServiceImpl implements ISysOssService {
     }
 
     @Override
-    public SysOss upload(MultipartFile file) {
+    public SysFile upload(MultipartFile file) {
         String originalfileName = file.getOriginalFilename();
         assert originalfileName != null;
         String suffix = StringUtils.substring(originalfileName, originalfileName.lastIndexOf("." ), originalfileName.length());
@@ -86,7 +86,7 @@ public class SysOssServiceImpl implements ISysOssService {
 //            throw new ServiceException(e.getMessage());
 //        }
         // 保存文件信息
-        SysOss oss = new SysOss();
+        SysFile oss = new SysFile();
 //        oss.setUrl(uploadResult.getUrl());
 //        oss.setFileSuffix(suffix);
 //        oss.setFileName(uploadResult.getFilename());
@@ -101,8 +101,8 @@ public class SysOssServiceImpl implements ISysOssService {
         if (isValid) {
             // 做一些业务上的校验,判断是否需要校验
         }
-        List<SysOss> list = baseMapper.selectBatchIds(ids);
-        for (SysOss sysOss : list) {
+        List<SysFile> list = baseMapper.selectBatchIds(ids);
+        for (SysFile sysFile : list) {
 //            OssClient storage = OssFactory.instance(sysOss.getService());
 //            storage.delete(sysOss.getUrl());
         }

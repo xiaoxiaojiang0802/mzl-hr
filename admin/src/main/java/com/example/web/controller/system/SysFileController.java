@@ -15,10 +15,10 @@ import com.example.common.core.validate.QueryGroup;
 import com.example.common.enums.BusinessType;
 import com.example.common.exception.ServiceException;
 import com.example.common.utils.file.FileUtils;
-import com.example.system.domain.SysOss;
+import com.example.system.domain.SysFile;
 import com.example.system.domain.bo.SysOssBo;
 import com.example.system.domain.vo.SysOssVo;
-import com.example.system.service.ISysOssService;
+import com.example.system.service.ISysFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -42,9 +42,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/system/oss")
-public class SysOssController extends BaseController {
+public class SysFileController extends BaseController {
 
-    private final ISysOssService iSysOssService;
+    private final ISysFileService iSysFileService;
 
     /**
      * 查询OSS对象存储列表
@@ -52,7 +52,7 @@ public class SysOssController extends BaseController {
     @SaCheckPermission("system:oss:list")
     @GetMapping("/list")
     public TableDataInfo<SysOssVo> list(@Validated(QueryGroup.class) SysOssBo bo, PageQuery pageQuery) {
-        return iSysOssService.queryPageList(bo, pageQuery);
+        return iSysFileService.queryPageList(bo, pageQuery);
     }
 
     /**
@@ -64,7 +64,7 @@ public class SysOssController extends BaseController {
     @GetMapping("/listByIds/{ossIds}")
     public R<List<SysOssVo>> listByIds(@NotEmpty(message = "主键不能为空")
                                        @PathVariable Long[] ossIds) {
-        List<SysOssVo> list = iSysOssService.listByIds(Arrays.asList(ossIds));
+        List<SysOssVo> list = iSysFileService.listByIds(Arrays.asList(ossIds));
         return R.ok(list);
     }
 
@@ -80,11 +80,11 @@ public class SysOssController extends BaseController {
         if (ObjectUtil.isNull(file)) {
             throw new ServiceException("上传文件不能为空");
         }
-        SysOss oss = iSysOssService.upload(file);
+        SysFile oss = iSysFileService.upload(file);
         Map<String, String> map = new HashMap<>(2);
         map.put("url", oss.getUrl());
         map.put("fileName", oss.getOriginalName());
-        map.put("ossId", oss.getOssId().toString());
+        map.put("ossId", oss.getFileId().toString());
         return R.ok(map);
     }
 
@@ -96,7 +96,7 @@ public class SysOssController extends BaseController {
     @SaCheckPermission("system:oss:download")
     @GetMapping("/download/{ossId}")
     public void download(@PathVariable Long ossId, HttpServletResponse response) throws IOException {
-        SysOssVo sysOss = iSysOssService.getById(ossId);
+        SysOssVo sysOss = iSysFileService.getById(ossId);
         if (ObjectUtil.isNull(sysOss)) {
             throw new ServiceException("文件数据不存在!");
         }
@@ -126,7 +126,7 @@ public class SysOssController extends BaseController {
     @DeleteMapping("/{ossIds}")
     public R<Void> remove(@NotEmpty(message = "主键不能为空")
                           @PathVariable Long[] ossIds) {
-        return toAjax(iSysOssService.deleteWithValidByIds(Arrays.asList(ossIds), true) ? 1 : 0);
+        return toAjax(iSysFileService.deleteWithValidByIds(Arrays.asList(ossIds), true) ? 1 : 0);
     }
 
 }

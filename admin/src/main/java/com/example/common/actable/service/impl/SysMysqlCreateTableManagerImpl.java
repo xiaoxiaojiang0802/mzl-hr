@@ -876,7 +876,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
      */
     private void createTableByMap(Map<String, TableConfig> newTableMap) {
         // 做创建表操作
-        if (newTableMap.size() > 0) {
+        if (!newTableMap.isEmpty()) {
             for (Entry<String, TableConfig> entry : newTableMap.entrySet()) {
                 Map<String, TableConfig> map = new HashMap<String, TableConfig>();
                 map.put(entry.getKey(), entry.getValue());

@@ -18,6 +18,8 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public IndexVo selectIndex() {
-        return indexMapper.selectIndex();
+        IndexVo indexVo = indexMapper.selectIndex();
+        indexVo.setAmount(indexMapper.sumAmount());
+        return indexVo;
     }
 }
