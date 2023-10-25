@@ -16,8 +16,8 @@ public class SmsLoginBody {
     /**
      * 用户名
      */
-    @NotBlank(message = "{user.phonenumber.not.blank}")
-    private String phonenumber;
+    @NotBlank(message = "{user.phoneNumber.not.blank}")
+    private String phoneNumber;
 
     /**
      * 用户密码

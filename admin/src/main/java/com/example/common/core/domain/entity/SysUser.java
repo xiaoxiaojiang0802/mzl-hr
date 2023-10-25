@@ -97,7 +97,7 @@ public class SysUser extends BaseEntity {
     @Column
     @Excel(name = "手机号码")
     @Sensitive(strategy = SensitiveStrategy.PHONE)
-    private String phonenumber;
+    private String phoneNumber;
 
     /**
      * 用户性别

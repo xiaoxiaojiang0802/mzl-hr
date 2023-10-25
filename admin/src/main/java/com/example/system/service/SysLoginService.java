@@ -84,8 +84,7 @@ public class SysLoginService {
 
     public String smsLogin(String phonenumber, String smsCode) {
         // 通过手机号查找用户
-        SysUser user = loadUserByPhonenumber(phonenumber);
-
+        SysUser user = selectUserByPhoneNumber(phonenumber);
         HttpServletRequest request = ServletUtils.getRequest();
         checkLogin(LoginType.SMS, user.getUserName(), () -> !validateSmsCode(phonenumber, smsCode, request));
         // 此处可根据登录用户的数据不同 自行创建 loginUser
@@ -180,8 +179,8 @@ public class SysLoginService {
         return user;
     }
 
-    private SysUser loadUserByPhonenumber(String phonenumber) {
-        SysUser user = userService.selectUserByPhonenumber(phonenumber);
+    private SysUser selectUserByPhoneNumber(String phonenumber) {
+        SysUser user = userService.selectUserByPhoneNumber(phonenumber);
         if (ObjectUtil.isNull(user)) {
             log.info("登录用户：{} 不存在.", phonenumber);
             throw new UserException("user.not.exists", phonenumber);
