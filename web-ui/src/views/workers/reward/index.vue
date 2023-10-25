@@ -10,15 +10,10 @@
 </template>
 
 <script>
-import {
-  pageReward,
-  getReward,
-  delReward,
-  addReward,
-  updateReward
-} from "@/api/workers/reward";
+import {addReward, delReward, pageReward, updateReward} from "@/api/workers/reward";
 
 export default {
+  dicts: ["reward_state"],
   name: "Reward",
   data() {
     return {
@@ -58,6 +53,11 @@ export default {
             prop: "type",
             type: "select",
             search: true,
+            dicUrl: process.env.VUE_APP_BASE_API + '/system/dict/data/type/reward_state',
+            props: {
+              label: 'dictLabel',
+              value: 'dictValue'
+            },
             rules: [{
               required: true,
               message: "请输入名称奖惩类型",
@@ -110,8 +110,7 @@ export default {
         const data = res.data;
         this.loading = false;
         this.page.total = data.total;
-        const result = data.records;
-        this.dataList = result;
+        this.dataList = data.records;
       })
     },
     rowSave(row, done, loading) {
