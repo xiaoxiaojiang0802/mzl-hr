@@ -11,18 +11,17 @@
         from sys_user u
                  left join leave_record lr on
             (u.user_id = lr.employee_id and
-             date_format(lr.start_date, '%Y-%m-%d') &lt;= date_format(now(), '%Y%m%d') and
-             date_format(lr.end_date, '%Y-%m-%d') &gt;= date_format(now(), '%Y%m%d'))
+             date_format(lr.start_date, '%Y-%m-%d') &lt;= date_format(now(), '%Y-%m-%d') and
+             date_format(lr.end_date, '%Y-%m-%d') &gt;= date_format(now(), '%Y-%m-%d'))
                  left join attendance_record ar on
             (ar.employee_number = u.employee_number and
-             date_format(ar.date, '%Y-%m-%d') = date_format(now(), '%Y%m%d'))
+             date_format(ar.date, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d'))
         where u.del_flag = '0'
-        group by u.user_id
     </select>
 
     <select id="sumAmount" resultType="java.math.BigDecimal">
         select sum(amount)
         from reward_punishment_record
-        where date_format(record_date, '%Y-%m') = date_format(now(), '%Y%m')
+        where date_format(record_date, '%Y-%m') = date_format(now(), '%Y-%m')
     </select>
 </mapper>

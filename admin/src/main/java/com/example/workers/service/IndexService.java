@@ -3,7 +3,7 @@ package com.example.workers.service;
 import com.example.workers.vo.IndexVo;
 
 /**
- * @author LJJ
+ * @author muzi
  * @date 2023/10/24
  */
 public interface IndexService {

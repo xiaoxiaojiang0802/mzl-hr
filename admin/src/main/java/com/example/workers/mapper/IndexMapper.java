@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.math.BigDecimal;
 
 /**
- * @author LJJ
+ * @author muzi
  * @date 2023/10/24
  */
 @Mapper

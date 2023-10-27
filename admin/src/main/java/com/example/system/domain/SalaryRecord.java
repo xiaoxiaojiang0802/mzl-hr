@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * 薪资记录实体类
- * @author LJJ
+ * @author muzi
  * @date 2023/10/8
  */
 @Data
