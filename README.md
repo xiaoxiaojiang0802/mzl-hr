@@ -1,6 +1,6 @@
 ## 开发环境
 
-JDK8、Mysql8、Maven、Node.js14、Visual Studio Code、IntelliJ IDEA Community
+JDK8、Mysql8、Maven、Node.js14、Visual Studio Code、IntelliJ IDEA Community、DBeaver
 
 ## 相关教程获取
 
