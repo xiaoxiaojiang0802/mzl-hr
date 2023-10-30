@@ -1,3 +1,14 @@
+## 开发环境
+
+JDK8、Mysql8、Maven、Node.js14、Visual Studio Code、IntelliJ IDEA Community
+
+## 相关教程获取
+
+![img_1.png](img_1.png)
+vx扫码关注“木子玲软件”，发送消息“职工管理系统”即可获取安装教程。
+
+有疑问即可发送消息留言即可。
+
 ## 免责声明
 
 本项目的源码仅供学习和研究使用，请勿用于商务用途或者其他非法用途，
