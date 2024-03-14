@@ -250,6 +250,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                    <finalName>${parent.artifactId}</finalName>
                 </configuration>
                 <executions>
                     <execution>
@@ -258,15 +259,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <warName>hotel</warName>
-                </configuration>
             </plugin>
         </plugins>
     </build>

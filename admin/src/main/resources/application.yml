@@ -15,7 +15,7 @@ cdmzl:
   # file文件缓存 minio
   fileType: minio
   # 文件路径 示例（ Windows配置D:/example/uploadPath，Linux配置 /home/example/uploadPath）
-  profile: D:/example/uploadPath
+  profile: ./example/uploadPath
   # 验证码类型 math 数组计算 char 字符验证
   captchaType: math
 captcha:
@@ -35,7 +35,7 @@ server:
   port: 5555
   servlet:
     # 应用的访问路径
-    context-path: /hr
+    context-path: /worker
   # undertow 配置
   undertow:
     # HTTP post内容的最大大小。当值为-1时，默认值为大小是无限的
