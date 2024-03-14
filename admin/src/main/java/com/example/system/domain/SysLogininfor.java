@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.common.actable.annotation.Column;
+import com.example.common.actable.constants.MySqlTypeConstant;
 import com.example.common.annotation.ExcelDictFormat;
 import com.example.common.convert.ExcelDictConvert;
 import lombok.Data;
@@ -87,7 +88,7 @@ public class SysLogininfor implements Serializable {
     /**
      * 访问时间
      */
-    @Column
+    @Column(type = MySqlTypeConstant.DATETIME)
     @ExcelProperty(value = "访问时间")
     private Date loginTime;
 
